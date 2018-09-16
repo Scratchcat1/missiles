@@ -1,0 +1,59 @@
+World/Environment:
+    gravity
+    resistance
+    other constants
+    
+    Surface
+    
+    Cities
+        Population/Health
+
+    Launch Platform:
+        health
+        max speed
+        fuel
+    
+        Launchers:
+            number of Missiles
+            health
+            Missiles:
+                Attached Warheads:
+                    number of warheads
+                    Warhead type:
+                        detonation on hit probability
+                        Damage
+                        weight
+
+                Rocket motor:
+                    amount of fuel
+                    fuel consumption
+                    force
+                    force range
+                    manuverability
+                
+                Targeting:
+                    target (coords/object)
+
+
+Physical Object:
+    position
+    velocity
+    weight
+    health
+    angle
+
+Explosion
+    Damage
+    current radius
+    expansion rate 
+    max radius
+
+
+All objects are either free or stored in another object:
+    if stored in another object all top level object effect affect lower levels e.g. damage/move/collide/accelerate
+    If an object is launched e.g. missile/warhead it becomes a top level object
+    If any object is damaged it damages the subcomponents to, if a warhead is damaged it may detonate, detonating warheads are made top level objects
+            
+            
+            
+
