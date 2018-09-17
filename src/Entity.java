@@ -53,8 +53,8 @@ public class Entity{
         this.position = this.position.add(this.velocity);
     }
 
-    public void force(Vector force){
-        Vector acceleration = force.mult(this.mass);
+    public void applyForce(Vector force){
+        Vector acceleration = force.mult(this.getMass());
         this.velocity = this.velocity.add(acceleration);
     }
 

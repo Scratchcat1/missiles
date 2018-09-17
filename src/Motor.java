@@ -1,13 +1,15 @@
 public class Motor extends Entity{
     double remainingFuel;
     double fuelConsumption;
+    double fuelMass;
     double force;
     double dutyCycle;
     double minDutyCycle;
 
-    public Motor(double mass, int health, int maxHealth, double fuelConsumption, double force, double minDutyCycle){
+    public Motor(double mass, int health, int maxHealth, double fuelConsumption, double fuelMass, double force, double minDutyCycle){
         super(mass, health, maxHealth);
         this.fuelConsumption = fuelConsumption;
+        this.fuelMass = fuelMass;
         this.force = force;
         this.minDutyCycle = minDutyCycle;
     }
@@ -17,7 +19,7 @@ public class Motor extends Entity{
     }
 
     public double getForce(){
-        if (remainingFuel > 0){
+        if (this.remainingFuel > 0){
             return this.force * this.dutyCycle;
         } else {
             return 0;
@@ -26,5 +28,9 @@ public class Motor extends Entity{
 
     public void update(double timeStep){
         this.remainingFuel -= this.fuelConsumption * timeStep;
+    }
+
+    public double getMass(){
+        return this.mass + this.remainingFuel * this.fuelMass;
     }
 }

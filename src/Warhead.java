@@ -11,6 +11,7 @@ public class Warhead extends Entity{
     }
 
     public Explosion detonate(){
+        this.setHealth(0);
         return new Explosion(this.getPosition(), this.damage, this.detonationRadius, this.detonationSpeed);
     }
 }

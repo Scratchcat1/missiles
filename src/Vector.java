@@ -5,14 +5,12 @@ public class Vector{
 
     public Vector(){}
     public Vector(double[] initialVector){
-        if (initialVector.length == 3){
-            this.vector = initialVector;
-        } else {
-            // throw new Exception("Incorrect initial vector size of " + initialVector.length);
-        }
+        this.vector = initialVector.clone();
     }
 
-
+    public Vector clone(){
+        return new Vector(this.vector);
+    }
 
     public double get(int i){
         return this.vector[i];
