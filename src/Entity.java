@@ -28,6 +28,14 @@ public class Entity{
         return this.velocity;
     }
 
+    public void setAngle(Vector newAngle){
+        this.angle = newAngle;
+    }
+
+    public Vector getAngle(){
+        return this.angle;
+    }
+
     public void setMass(double mass){
         this.mass = mass;
     }
@@ -49,13 +57,20 @@ public class Entity{
         return this.health;
     }
 
-    public void move(){
-        this.position = this.position.add(this.velocity);
+    public void move(double timeStep){
+        this.position = this.position.add(this.velocity.mult(timeStep));
     }
 
-    public void applyForce(Vector force){
+    /** Updates kinetic properties of entity while attached to another object. Override to pass information to children */
+    public void updateKinetics(Vector position, Vector velocity, Vector angle){
+        this.setPosition(position);
+        this.setVelocity(velocity);
+        this.setAngle(angle);
+    }
+
+    public void applyForce(Vector force, double timeStep){
         Vector acceleration = force.mult(this.getMass());
-        this.velocity = this.velocity.add(acceleration);
+        this.velocity = this.velocity.add(acceleration.mult(timeStep));
     }
 
 }

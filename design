@@ -55,5 +55,5 @@ All objects are either free or stored in another object:
     If any object is damaged it damages the subcomponents to, if a warhead is damaged it may detonate, detonating warheads are made top level objects
             
             
-            
+    updateKinetics is the inactive version of move, the caller of updateKinetics is in control. 
 

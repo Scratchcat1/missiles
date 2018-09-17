@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Missile extends Entity{
     Warhead[] warheads;
     Motor[] motors;
@@ -8,6 +10,30 @@ public class Missile extends Entity{
         this.warheads = warheads;
         this.motors = motors;
         this.targeting = targeting;
+    }
+
+    public Warhead[] update(double timeStep){
+
+        for (Motor motor : this.motors){
+            motor.setDutyCycle(this.targeting.getDutyCycle(motor, this.getPosition(), this.getVelocity()));
+            motor.update(timeStep);
+        }
+
+        this.move(timeStep);
+
+        for (Motor motor : this.motors){
+            motor.updateKinetics(this.getPosition(), this.getVelocity(), this.getAngle());
+        }
+
+        ArrayList<Warhead> launchingWarheads = new ArrayList<Warhead>();
+        for (Warhead warhead : this.warheads){
+            warhead.updateKinetics(this.getPosition(), this.getVelocity(), this.getAngle());
+
+            if (this.targeting.shouldLaunch(warhead)){
+                launchingWarheads.add(warhead);
+            }
+        }
+        return launchingWarheads.toArray(new Warhead[launchingWarheads.size()]);
     }
 
     public double getMass(){
@@ -21,32 +47,17 @@ public class Missile extends Entity{
         return totalMass;
     }
 
-    public Warhead[] update(double timeStep){
-
+    public void updateKinetics(Vector position, Vector velocity, Vector angle){
+        this.setPosition(position);
+        this.setVelocity(velocity);
+        this.setAngle(angle);
+        
         for (Motor motor : this.motors){
-            motor.setDutyCycle(this.targeting.getDutyCycle(motor, this.getPosition(), this.getVelocity()));
-            motor.update(timeStep);
+            motor.updateKinetics(position, velocity, angle);
         }
 
-        this.move();
-
-        for (Motor motor : this.motors){
-            motor.setPosition(this.getPosition());
-        }
-
-        Warhead[] launchingWarheads = new Warhead[this.warheads.length];
-        int launchedWarheadsCount = 0;
         for (Warhead warhead : this.warheads){
-            warhead.setPosition(this.getPosition());
-
-            if (this.targeting.shouldLaunch(warhead)){
-                launchingWarheads[launchedWarheadsCount] = warhead;
-                launchedWarheadsCount += 1;
-            }
+            warhead.updateKinetics(position, velocity, angle);
         }
-
-        return launchingWarheads;
     }
-
-    
 }

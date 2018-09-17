@@ -24,7 +24,25 @@ public class Launcher extends Entity{
         return missile;
     }
 
-    public int remainingMissiles(){
+    public int getRemainingMissiles(){
         return this.missiles.size();
+    }
+
+    public double getMass(){
+        double totalMass = this.mass;
+        for (Missile missile : this.missiles){
+            totalMass += missile.getMass();
+        }
+        return totalMass;
+    }
+
+    public void updateKinetics(Vector position, Vector velocity, Vector angle){
+        this.setPosition(position);
+        this.setVelocity(velocity);
+        this.setAngle(angle);
+
+        for (Missile missile : this.missiles){
+            missile.updateKinetics(position, velocity, angle);
+        }
     }
 }

@@ -6,8 +6,8 @@ public class City extends Entity{
         super(Double.POSITIVE_INFINITY, health, health);
     }
 
-    public void update(){
-        int healthChange = (int) (this.getHealth() * City.GROWTH_RATE);
+    public void update(double timeStep){
+        int healthChange = (int) (this.getHealth() * City.GROWTH_RATE * timeStep);
         this.modifyHealth(healthChange);
     }
 }
