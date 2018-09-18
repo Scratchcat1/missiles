@@ -1,15 +1,21 @@
 import java.util.Arrays;
 
 public class Vector{
-    double[] vector = new double[3];
+    double[] vector;
 
-    public Vector(){}
+    public Vector(int length){
+        this.vector = new double[length];
+    }
     public Vector(double[] initialVector){
         this.vector = initialVector.clone();
     }
 
     public Vector clone(){
         return new Vector(this.vector);
+    }
+
+    public int length(){
+        return this.vector.length;
     }
 
     public double get(int i){
@@ -32,7 +38,7 @@ public class Vector{
     }
 
     public Vector add(Vector otherVector){
-        Vector newVector = new Vector();
+        Vector newVector = new Vector(this.vector.length);
         for (int i = 0; i < this.vector.length; i++){
             double newValue = this.vector[i] + otherVector.get(i);
             newVector.set(i, newValue);
@@ -45,7 +51,7 @@ public class Vector{
     }
 
     public Vector mult(double k){
-        Vector newVector = new Vector();
+        Vector newVector = new Vector(this.vector.length);
         for (int i = 0; i < this.vector.length; i++){
             newVector.set(i, this.vector[i] * k);
         }

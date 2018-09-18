@@ -1,7 +1,7 @@
 public class Entity{
-    Vector position = new Vector();
-    Vector velocity = new Vector();
-    Vector angle = new Vector();
+    Vector position = new Vector(3);
+    Vector velocity = new Vector(3);
+    Vector angle = new Vector(3);
     double mass;
     int health;
     int maxHealth;
@@ -71,6 +71,11 @@ public class Entity{
     public void applyForce(Vector force, double timeStep){
         Vector acceleration = force.mult(this.getMass());
         this.velocity = this.velocity.add(acceleration.mult(timeStep));
+    }
+
+    /** Return the distance from the position vector to the most distance point of the entity. Default is to assume the entity is a point object */
+    public double getCollisionRadius(){
+        return 0;
     }
 
 }
