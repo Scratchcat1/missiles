@@ -1,18 +1,18 @@
 import java.util.ArrayList;
 
 public class Missile extends Entity{
-    Warhead[] warheads;
-    Motor[] motors;
+    ArrayList<Warhead> warheads;
+    ArrayList<Motor> motors;
     Targeting targeting;
 
-    public Missile(double missileMass, int health, int maxHealth, Warhead[] warheads, Motor[] motors, Targeting targeting){
+    public Missile(double missileMass, int health, int maxHealth, ArrayList<Warhead> warheads, ArrayList<Motor> motors, Targeting targeting){
         super(missileMass, health, maxHealth);
         this.warheads = warheads;
         this.motors = motors;
         this.targeting = targeting;
     }
 
-    public Warhead[] update(double timeStep){
+    public void update(double timeStep){
 
         for (Motor motor : this.motors){
             motor.setDutyCycle(this.targeting.getDutyCycle(motor, this.getPosition(), this.getVelocity()));
@@ -24,16 +24,19 @@ public class Missile extends Entity{
         for (Motor motor : this.motors){
             motor.updateKinetics(this.getPosition(), this.getVelocity(), this.getAngle());
         }
+    }
 
+    public ArrayList<Warhead> launchWarheads(){
         ArrayList<Warhead> launchingWarheads = new ArrayList<Warhead>();
         for (Warhead warhead : this.warheads){
             warhead.updateKinetics(this.getPosition(), this.getVelocity(), this.getAngle());
 
             if (this.targeting.shouldLaunch(warhead)){
+                this.warheads.remove(warhead);
                 launchingWarheads.add(warhead);
             }
         }
-        return launchingWarheads.toArray(new Warhead[launchingWarheads.size()]);
+        return launchingWarheads;
     }
 
     public double getMass(){

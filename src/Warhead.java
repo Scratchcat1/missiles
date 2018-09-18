@@ -10,6 +10,10 @@ public class Warhead extends Entity{
         this.detonationSpeed = detonationSpeed;
     }
 
+    public void update(double timeStep){
+        this.move(timeStep);
+    }
+
     public Explosion detonate(){
         this.setHealth(0);
         return new Explosion(this.getPosition(), this.damage, this.detonationRadius, this.detonationSpeed);

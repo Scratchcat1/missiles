@@ -1,18 +1,18 @@
 import java.util.ArrayList;
 
 public class LaunchPlatform extends Entity {
-    Launcher[] launchers;
-    Motor[] motors;
+    ArrayList<Launcher> launchers;
+    ArrayList<Motor> motors;
     Targeting targeting;
 
-    public LaunchPlatform(double launchPlatformMass, int health, int maxHealth, Launcher[] launchers, Motor[] motors, Targeting targeting){
+    public LaunchPlatform(double launchPlatformMass, int health, int maxHealth, ArrayList<Launcher> launchers, ArrayList<Motor> motors, Targeting targeting){
         super(launchPlatformMass, health, maxHealth);
         this.launchers = launchers;
         this.motors = motors;
         this.targeting = targeting;
     }
 
-    public Missile[] update(double timeStep){
+    public void update(double timeStep){
         for (Motor motor : this.motors){
             motor.setDutyCycle(this.targeting.getDutyCycle(motor, this.getPosition(), this.getVelocity()));
             motor.update(timeStep);
@@ -23,7 +23,9 @@ public class LaunchPlatform extends Entity {
         for (Motor motor : this.motors){
             motor.updateKinetics(this.getPosition(), this.getVelocity(), this.getAngle());
         }
+    }
 
+    public ArrayList<Missile> launchMissiles(){
         ArrayList<Missile> launchedMissiles = new ArrayList<>();
         for (Launcher launcher : this.launchers){
             launcher.updateKinetics(this.getPosition(), this.getVelocity(), this.getAngle());
@@ -31,7 +33,7 @@ public class LaunchPlatform extends Entity {
                 launchedMissiles.add(launcher.launchMissile(0));
             }
         }
-        return launchedMissiles.toArray(new Missile[launchedMissiles.size()]);
+        return launchedMissiles;
     }
 
 
