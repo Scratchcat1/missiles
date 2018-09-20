@@ -12,7 +12,8 @@ public class LaunchPlatform extends Entity {
         this.targeting = targeting;
     }
 
-    public void update(double timeStep){
+    public void update(double airResistance, double gravAccel, double timeStep){
+        Vector forceVector = new Vector(3);
         for (Motor motor : this.motors){
             motor.setDutyCycle(this.targeting.getDutyCycle(motor, this.getPosition(), this.getVelocity()));
             motor.update(timeStep);

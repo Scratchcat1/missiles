@@ -10,7 +10,8 @@ public class Warhead extends Entity{
         this.detonationSpeed = detonationSpeed;
     }
 
-    public void update(double timeStep){
+    public void update(double airResistance, double gravAccel, double timeStep){
+        this.applyForce(new Vector(3), airResistance, gravAccel, timeStep);
         this.move(timeStep);
     }
 

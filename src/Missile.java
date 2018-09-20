@@ -12,7 +12,7 @@ public class Missile extends Entity{
         this.targeting = targeting;
     }
 
-    public void update(double timeStep){
+    public void update(double airResistance, double gravAccel, double timeStep){
 
         for (Motor motor : this.motors){
             motor.setDutyCycle(this.targeting.getDutyCycle(motor, this.getPosition(), this.getVelocity()));

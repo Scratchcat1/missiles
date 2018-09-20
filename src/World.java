@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 
 public class World{
+    static double airResistance = 1;
+    static double gravAccel = -9.8;
     ArrayList<City> cities;
     ArrayList<LaunchPlatform> launchPlatforms;
     ArrayList<Launcher> launchers;
@@ -30,13 +32,13 @@ public class World{
 
     public void updateAll(double timeStep){
         for (LaunchPlatform launchPlatform : this.launchPlatforms){
-            launchPlatform.update(timeStep);
+            launchPlatform.update(World.airResistance, World.gravAccel, timeStep);
         }
         for (Missile missile : this.missiles){
-            missile.update(timeStep);
+            missile.update(World.airResistance, World.gravAccel, timeStep);
         }
         for (Warhead warhead : this.warheads){
-            warhead.update(timeStep);
+            warhead.update(World.airResistance, World.gravAccel, timeStep);
         }
         for (Explosion explosion : this.explosions){
             explosion.update(timeStep);

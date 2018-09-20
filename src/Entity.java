@@ -1,7 +1,7 @@
 public class Entity{
     Vector position = new Vector(3);
     Vector velocity = new Vector(3);
-    Vector angle = new Vector(3);
+    Angle3D angle = new Angle3D();
     double mass;
     int health;
     int maxHealth;
@@ -28,12 +28,16 @@ public class Entity{
         return this.velocity;
     }
 
-    public void setAngle(Vector newAngle){
+    public void setAngle(Angle3D newAngle){
         this.angle = newAngle;
     }
 
-    public Vector getAngle(){
+    public Angle3D getAngle(){
         return this.angle;
+    }
+
+    public void rotate(Angle3D rotationAngle){
+        this.angle.rotate(rotationAngle);   
     }
 
     public void setMass(double mass){
@@ -62,14 +66,22 @@ public class Entity{
     }
 
     /** Updates kinetic properties of entity while attached to another object. Override to pass information to children */
-    public void updateKinetics(Vector position, Vector velocity, Vector angle){
+    public void updateKinetics(Vector position, Vector velocity, Angle3D angle){
         this.setPosition(position);
         this.setVelocity(velocity);
         this.setAngle(angle);
     }
 
-    public void applyForce(Vector force, double timeStep){
-        Vector acceleration = force.mult(this.getMass());
+    public void applyForce(Vector motorForce, double airResistance, double gravAccel, double timeStep){
+        Vector acceleration = motorForce.mult(this.getMass());
+        acceleration.set(2, gravAccel * this.getMass() + acceleration.get(2));
+
+        Vector airResistForce = this.velocity.clone();
+        for (int i = 0; i < airResistForce.length(); i++){
+            airResistForce.set(i, airResistForce.get(i) * Math.abs(airResistForce.get(i)) * airResistance);
+        }
+        acceleration.add(airResistForce.negation());
+
         this.velocity = this.velocity.add(acceleration.mult(timeStep));
     }
 

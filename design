@@ -57,3 +57,6 @@ All objects are either free or stored in another object:
             
     updateKinetics is the inactive version of move, the caller of updateKinetics is in control. 
 
+Angles:
+    [pitch, yaw, roll]/[up/down, left/right, roll]
+    
