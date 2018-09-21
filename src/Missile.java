@@ -13,12 +13,14 @@ public class Missile extends Entity{
     }
 
     public void update(double airResistance, double gravAccel, double timeStep){
-
+        Vector motorForce = new Vector(3);
         for (Motor motor : this.motors){
             motor.setDutyCycle(this.targeting.getDutyCycle(motor, this.getPosition(), this.getVelocity()));
             motor.update(timeStep);
+            motorForce = motorForce.add(motor.getForce());
         }
 
+        this.applyForce(motorForce, airResistance, gravAccel, timeStep);
         this.move(timeStep);
 
         for (Motor motor : this.motors){
@@ -50,7 +52,7 @@ public class Missile extends Entity{
         return totalMass;
     }
 
-    public void updateKinetics(Vector position, Vector velocity, Vector angle){
+    public void updateKinetics(Vector position, Vector velocity, Angle3D angle){
         this.setPosition(position);
         this.setVelocity(velocity);
         this.setAngle(angle);

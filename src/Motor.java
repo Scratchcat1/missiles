@@ -18,12 +18,12 @@ public class Motor extends Entity{
         this.dutyCycle = Math.max(newDutyCycle, this.minDutyCycle);
     }
 
-    public double getForce(){
+    public Vector getForce(){
+        double force = 0;
         if (this.remainingFuel > 0){
-            return this.force * this.dutyCycle;
-        } else {
-            return 0;
+            force = this.force * this.dutyCycle;
         }
+        return this.getAngle().toVector(force);
     }
 
     public void update(double timeStep){

@@ -36,7 +36,7 @@ public class Launcher extends Entity{
         return totalMass;
     }
 
-    public void updateKinetics(Vector position, Vector velocity, Vector angle){
+    public void updateKinetics(Vector position, Vector velocity, Angle3D angle){
         this.setPosition(position);
         this.setVelocity(velocity);
         this.setAngle(angle);

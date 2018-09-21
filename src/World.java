@@ -5,10 +5,38 @@ public class World{
     static double gravAccel = -9.8;
     ArrayList<City> cities;
     ArrayList<LaunchPlatform> launchPlatforms;
-    ArrayList<Launcher> launchers;
+    // ArrayList<Launcher> launchers;
     ArrayList<Missile> missiles;
     ArrayList<Warhead> warheads;
     ArrayList<Explosion> explosions;
+
+    public World(){
+        this.reset();
+    }
+
+    public void reset(){
+        this.cities = new ArrayList<City>();
+        this.launchPlatforms = new ArrayList<LaunchPlatform>();
+        this.missiles = new ArrayList<Missile>();
+        this.warheads = new ArrayList<Warhead>();
+        this.explosions = new ArrayList<Explosion>();
+    }
+
+    public void addCity(City city){
+        this.cities.add(city);
+    }
+
+    public void addLaunchPlatform(LaunchPlatform launchPlatform){
+        this.launchPlatforms.add(launchPlatform);
+    }
+
+    public void addMissiles(Missile missile){
+        this.missiles.add(missile);
+    }
+
+    public void addWarheads(Warhead warhead){
+        this.warheads.add(warhead);
+    }
 
     public void step(double timeStep){
         for (LaunchPlatform launchPlatform : this.launchPlatforms){
@@ -53,4 +81,3 @@ public class World{
         this.explosions.removeIf(item -> item.getHealth() <= 0);
     }
 }
-
