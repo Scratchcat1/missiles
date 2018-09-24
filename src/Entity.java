@@ -20,6 +20,12 @@ public class Entity{
         return this.position;
     }
 
+    public void randomisePosition(Vector minPosition, Vector maxPosition){
+        for (int i = 0; i < this.position.length(); i++){
+            this.position.set(i, Math.random() * (maxPosition.get(i) - minPosition.get(i)) + minPosition.get(i));
+        }
+    }
+
     public void setVelocity(Vector newVelocity){
         this.velocity = newVelocity;
     }
@@ -89,5 +95,4 @@ public class Entity{
     public double getCollisionRadius(){
         return 0;
     }
-
 }

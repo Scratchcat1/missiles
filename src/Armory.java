@@ -53,15 +53,4 @@ public class Armory{
         }
         return cities;
     }
-
-    public static ArrayList<Entity> randomisePosition(ArrayList<Entity> entities, Vector minPosition, Vector maxPosition){
-        for (Entity entity : entities){
-            Vector newPosition = new Vector(3);
-            for (int i = 0; i < newPosition.length(); i++){
-                newPosition.set(i, Math.random() * (maxPosition.get(i) - minPosition.get(i)) + minPosition.get(i));
-            }
-            entity.setPosition(newPosition);
-        }
-        return entities;
-    }
 }

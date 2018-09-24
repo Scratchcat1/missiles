@@ -14,6 +14,28 @@ public class World{
         this.reset();
     }
 
+    public static void main(String[] args){
+        World world = new World();
+        double[] maxPositionArray = {10000, 10000, 10000};
+        Vector minPosition = new Vector(3);
+        Vector maxPosition = new Vector(maxPositionArray);
+
+        for (City city : Armory.createBasicCities(10)){
+            city.randomisePosition(minPosition, maxPosition);
+            world.addCity(city);
+        }
+
+        for (LaunchPlatform launchPlatform : Armory.createBasicLaunchPlatforms(10)){
+            launchPlatform.randomisePosition(minPosition, maxPosition);
+            world.addLaunchPlatform(launchPlatform);
+        }
+
+        for (int i = 0; i < 10000; i++){
+            world.step(1);
+            System.out.println("step");
+        }
+    }
+
     public void reset(){
         this.cities = new ArrayList<City>();
         this.launchPlatforms = new ArrayList<LaunchPlatform>();

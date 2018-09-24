@@ -60,3 +60,14 @@ All objects are either free or stored in another object:
 Angles:
     [pitch, yaw, roll]/[up/down, left/right, roll]
     
+
+
+            Description:
+                describes the entity and it's children
+                type
+                position
+                velocity
+                angle
+                mass
+                health
+                children
