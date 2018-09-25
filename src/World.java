@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class World{
-    static double airResistance = 1;
+    static double airResistance = 0.001;
     static double gravAccel = -9.8;
     ArrayList<City> cities;
     ArrayList<LaunchPlatform> launchPlatforms;
@@ -25,14 +25,17 @@ public class World{
             world.addCity(city);
         }
 
-        for (LaunchPlatform launchPlatform : Armory.createBasicLaunchPlatforms(10)){
-            launchPlatform.randomisePosition(minPosition, maxPosition);
+        for (LaunchPlatform launchPlatform : Armory.createBasicLaunchPlatforms(1)){
+            // launchPlatform.randomisePosition(minPosition, maxPosition);
             world.addLaunchPlatform(launchPlatform);
         }
 
-        for (int i = 0; i < 10000; i++){
-            world.step(1);
+        for (int i = 0; i < 10; i++){
+            world.step(0.1);
             System.out.println("step");
+            for (LaunchPlatform launchPlatform : world.launchPlatforms){
+                launchPlatform.status();
+            }
         }
     }
 

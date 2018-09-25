@@ -71,3 +71,14 @@ Angles:
                 mass
                 health
                 children
+
+
+
+Viewer:
+    takes information or state (A world object) and draws this information;
+    Either:
+        take a world object and extract each object and render individually
+        or
+        convert all world objects into descriptive objects (i.e. type, location, children etc. ) in a tree
+
+    Convert coordinates into screen coordiantes.

@@ -79,14 +79,14 @@ public class Entity{
     }
 
     public void applyForce(Vector motorForce, double airResistance, double gravAccel, double timeStep){
-        Vector acceleration = motorForce.mult(this.getMass());
-        acceleration.set(2, gravAccel * this.getMass() + acceleration.get(2));
+        Vector acceleration = motorForce.mult( 1 / this.getMass());
+        acceleration.set(2, gravAccel + acceleration.get(2));
 
-        Vector airResistForce = this.velocity.clone();
+        Vector airResistForce = new Vector(3);
         for (int i = 0; i < airResistForce.length(); i++){
-            airResistForce.set(i, airResistForce.get(i) * Math.abs(airResistForce.get(i)) * airResistance);
+            airResistForce.set(i, this.velocity.get(i) * Math.abs(this.velocity.get(i)) * airResistance);
         }
-        acceleration.add(airResistForce.negation());
+        acceleration = acceleration.add(airResistForce.negation());
 
         this.velocity = this.velocity.add(acceleration.mult(timeStep));
     }
@@ -94,5 +94,12 @@ public class Entity{
     /** Return the distance from the position vector to the most distance point of the entity. Default is to assume the entity is a point object */
     public double getCollisionRadius(){
         return 0;
+    }
+
+    public void status(){
+        System.out.print("---");
+        this.position.print();
+        this.velocity.print();
+        this.angle.toVector(1).print();
     }
 }

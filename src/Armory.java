@@ -41,7 +41,7 @@ public class Armory{
     public static ArrayList<LaunchPlatform> createBasicLaunchPlatforms(int count){
         ArrayList<LaunchPlatform> launchPlatforms = new ArrayList<LaunchPlatform>();
         for (int i = 0; i < count; i++){
-            launchPlatforms.add(new LaunchPlatform(1000, 1000, 1000, Armory.createBasicLaunchers(10), Armory.createBasicMotors(10), new Targeting(new Vector(3))));
+            launchPlatforms.add(new LaunchPlatform(1000, 1000, 1000, Armory.createBasicLaunchers(10), Armory.createBasicMotors(50), new Targeting(new Vector(3))));
         }
         return launchPlatforms;
     }

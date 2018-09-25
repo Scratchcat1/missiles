@@ -1,5 +1,5 @@
 public class Motor extends Entity{
-    double remainingFuel;
+    double remainingFuel = 1;
     double fuelConsumption;
     double fuelMass;
     double force;

@@ -3,7 +3,7 @@ public class Angle3D{
     // [Pitch, Yaw, Roll]
 
     public Angle3D(){
-        this.angle = new double[3];
+        this.angle = new double[]{Math.PI/2, 0, 0};
     }
     public Angle3D(double[] initialVector){
         this.angle = initialVector.clone();
@@ -24,7 +24,7 @@ public class Angle3D{
     public Vector toVector(double scalar){
         Vector vector = new Vector(3);
         vector.set(2, scalar * Math.sin(this.angle[0]));
-        double xyScalar = scalar * Math.abs(Math.cos(this.angle[0]));
+        double xyScalar = scalar * Math.cos(this.angle[0]);
         vector.set(0, xyScalar * Math.cos(this.angle[1]));
         vector.set(1, xyScalar * Math.sin(this.angle[1]));
         return vector;

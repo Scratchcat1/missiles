@@ -79,6 +79,6 @@ public class Vector{
     }
 
     public void print(){
-        System.out.print(Arrays.toString(this.vector));
+        System.out.println(Arrays.toString(this.vector));
     }
 }
