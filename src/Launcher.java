@@ -23,7 +23,7 @@ public class Launcher extends Entity{
         Missile missile = this.missiles.remove(index);
         return missile;
     }
-
+    
     public int getRemainingMissiles(){
         return this.missiles.size();
     }

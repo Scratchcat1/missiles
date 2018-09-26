@@ -6,7 +6,7 @@ public class Targeting{
     }
 
     public boolean shouldLaunch(Warhead warhead){
-        if (warhead.getHealth() < 10){
+        if (warhead.getPosition().get(2) > 70000){
             return true;
         }
 
@@ -18,7 +18,7 @@ public class Targeting{
             return true;
         }
         
-        return false;
+        return true;
     }
 
     public double getDutyCycle(Motor motor, Vector position, Vector velocity){

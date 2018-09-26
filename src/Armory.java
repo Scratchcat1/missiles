@@ -12,7 +12,7 @@ public class Armory{
     public static ArrayList<Motor> createBasicMotors(int count){
         ArrayList<Motor> motors = new ArrayList<Motor>();
         for (int i = 0; i < count; i++){
-            motors.add(new Motor(50, 50, 50, 0.01, 50, 10000, 0.5));
+            motors.add(new Motor(100, 50, 50, 0.01, 50, 10000, 0.5));
         }
         return motors;
     }
@@ -20,7 +20,7 @@ public class Armory{
     public static ArrayList<Missile> createBasicMissiles(int count){
         ArrayList<Missile> missiles = new ArrayList<Missile>();
         for (int i = 0; i < count; i++){
-            missiles.add(new Missile(100, 100, 100, Armory.createBasicWarheads(3), Armory.createBasicMotors(3), new Targeting(new Vector(3))));
+            missiles.add(new Missile(300, 100, 100, Armory.createBasicWarheads(3), Armory.createBasicMotors(1), new Targeting(new Vector(3))));
         }
         return missiles;
     }
@@ -41,7 +41,7 @@ public class Armory{
     public static ArrayList<LaunchPlatform> createBasicLaunchPlatforms(int count){
         ArrayList<LaunchPlatform> launchPlatforms = new ArrayList<LaunchPlatform>();
         for (int i = 0; i < count; i++){
-            launchPlatforms.add(new LaunchPlatform(1000, 1000, 1000, Armory.createBasicLaunchers(10), Armory.createBasicMotors(50), new Targeting(new Vector(3))));
+            launchPlatforms.add(new LaunchPlatform(10000, 1000, 1000, Armory.createBasicLaunchers(2), Armory.createBasicMotors(30), new Targeting(new Vector(3))));
         }
         return launchPlatforms;
     }

@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 public class World{
     static double airResistance = 0.001;
@@ -30,12 +31,12 @@ public class World{
             world.addLaunchPlatform(launchPlatform);
         }
 
-        for (int i = 0; i < 10; i++){
-            world.step(0.1);
-            System.out.println("step");
-            for (LaunchPlatform launchPlatform : world.launchPlatforms){
-                launchPlatform.status();
-            }
+        for (int i = 0; i < 1000; i++){
+            world.step(1);
+            world.debugOutput(i);
+            try{
+                TimeUnit.MILLISECONDS.sleep(1000);
+            } catch (Exception e) {}
         }
     }
 
@@ -104,5 +105,26 @@ public class World{
         this.missiles.removeIf(item -> item.getHealth() <= 0);
         this.warheads.removeIf(item -> item.getHealth() <= 0);
         this.explosions.removeIf(item -> item.getHealth() <= 0);
+    }
+
+    public void debugOutput(int step){
+        System.out.println("-----------STEP" + step);
+        System.out.println("LPS");
+        for (LaunchPlatform launchPlatform : this.launchPlatforms){
+            launchPlatform.status();
+            for (Launcher launcher : launchPlatform.launchers){
+                System.out.println(launcher.getRemainingMissiles());
+            }
+        }
+
+        System.out.println("Missiles");
+        for (Missile missile : this.missiles){
+            missile.status();
+        }
+
+        System.out.println("Warheads");
+        for (Warhead warhead : this.warheads){
+            warhead.status();
+        }
     }
 }

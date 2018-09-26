@@ -32,13 +32,12 @@ public class LaunchPlatform extends Entity {
         ArrayList<Missile> launchedMissiles = new ArrayList<>();
         for (Launcher launcher : this.launchers){
             launcher.updateKinetics(this.getPosition(), this.getVelocity(), this.getAngle());
-            if (targeting.shouldLaunch(launcher)){
+            if (launcher.getRemainingMissiles() > 0 && this.targeting.shouldLaunch(launcher)){
                 launchedMissiles.add(launcher.launchMissile(0));
             }
         }
         return launchedMissiles;
     }
-
 
     public double getMass(){
         double totalMass = this.mass;

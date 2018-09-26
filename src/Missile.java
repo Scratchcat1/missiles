@@ -29,16 +29,27 @@ public class Missile extends Entity{
     }
 
     public ArrayList<Warhead> launchWarheads(){
-        ArrayList<Warhead> launchingWarheads = new ArrayList<Warhead>();
-        for (Warhead warhead : this.warheads){
+        ArrayList<Integer> launchingWarheadPositions = new ArrayList<Integer>();
+        for (int i = 0; i < this.warheads.size(); i++){
+            Warhead warhead = this.warheads.get(i);
             warhead.updateKinetics(this.getPosition(), this.getVelocity(), this.getAngle());
 
-            if (this.targeting.shouldLaunch(warhead)){
-                this.warheads.remove(warhead);
-                launchingWarheads.add(warhead);
+            if (this.getRemainingWarheads() > 0 && this.targeting.shouldLaunch(warhead)){
+                launchingWarheadPositions.add(i);
             }
         }
+
+        ArrayList<Warhead> launchingWarheads = new ArrayList<Warhead>();
+        for (int i = 0; i < launchingWarheadPositions.size(); i++){
+            Warhead warhead = this.warheads.remove(launchingWarheadPositions.get(i) - i);
+            launchingWarheads.add(warhead);
+        }
+
         return launchingWarheads;
+    }
+
+    public int getRemainingWarheads(){
+        return this.warheads.size();
     }
 
     public double getMass(){

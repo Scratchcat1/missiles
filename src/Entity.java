@@ -84,11 +84,15 @@ public class Entity{
 
         Vector airResistForce = new Vector(3);
         for (int i = 0; i < airResistForce.length(); i++){
-            airResistForce.set(i, this.velocity.get(i) * Math.abs(this.velocity.get(i)) * airResistance);
+            airResistForce.set(i, this.velocity.get(i) * Math.abs(this.velocity.get(i)) * airResistance * Math.pow(Math.E, -this.position.get(2)/15000));
         }
         acceleration = acceleration.add(airResistForce.negation());
 
         this.velocity = this.velocity.add(acceleration.mult(timeStep));
+    }
+
+    public void update(double timeStep){
+        this.move(timeStep);
     }
 
     /** Return the distance from the position vector to the most distance point of the entity. Default is to assume the entity is a point object */
@@ -97,9 +101,11 @@ public class Entity{
     }
 
     public void status(){
-        System.out.print("---");
+        System.out.print("Pos");
         this.position.print();
+        System.out.print("Vel");
         this.velocity.print();
+        System.out.print("Ang");
         this.angle.toVector(1).print();
     }
 }
