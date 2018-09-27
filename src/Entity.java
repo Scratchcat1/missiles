@@ -97,7 +97,7 @@ public class Entity{
 
     /** Return the distance from the position vector to the most distance point of the entity. Default is to assume the entity is a point object */
     public double getCollisionRadius(){
-        return 0;
+        return 1;
     }
 
     public void status(){

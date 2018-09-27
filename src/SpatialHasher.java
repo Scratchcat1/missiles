@@ -24,22 +24,27 @@ public class SpatialHasher{
         int[] maxBucket = new int[position.length()];
         for (int i = 0; i < position.length(); i++){
             minBucket[i] = (int) Math.floor(minPosition.get(i) / this.bucketSize[i]);
-            maxBucket[i] = (int) Math.floor(minPosition.get(i) / this.bucketSize[i]);
+            maxBucket[i] = (int) Math.floor(maxPosition.get(i) / this.bucketSize[i]);
         }
 
         boolean complete = false;
         int[] counterBucket = new int[position.length()];
         ArrayList<int[]> keys = new ArrayList<int[]>();
-        while (!complete){
-            // Incrementing from 0 size
-            counterBucket[0] += 1;
-            for (int i = 0; i < counterBucket.length; i++){
-                if (counterBucket[i] == maxBucket[i]){
-                    counterBucket[i] = minBucket[i];
-                    if (i != position.length() - 1){
-                        counterBucket[i + 1] += 1;
-                    } else {
-                        complete = true;
+
+        if (entity.getCollisionRadius() == 0){
+            keys.add(minBucket.clone());
+        } else {
+            while (!complete){
+                keys.add(counterBucket.clone());
+                counterBucket[0] += 1;
+                for (int i = 0; i < counterBucket.length; i++){
+                    if (counterBucket[i] == maxBucket[i] + 1){
+                        counterBucket[i] = minBucket[i];
+                        if (i != position.length() - 1){
+                            counterBucket[i + 1] += 1;
+                        } else {
+                            complete = true;
+                        }
                     }
                 }
             }
@@ -50,7 +55,7 @@ public class SpatialHasher{
 
     public void add(Entity entity){
         for (int[] key : this.getKeys(entity)){
-            if (this.buckets.containsKey(key)){
+            if (!this.buckets.containsKey(key)){
                 this.buckets.put(key, new ArrayList<Entity>());
             }
             this.buckets.get(key).add(entity);
@@ -60,7 +65,9 @@ public class SpatialHasher{
     public ArrayList<Entity> get(Entity entity){
         ArrayList<Entity> nearbyEntities = new ArrayList<Entity>();
         for (int[] key : this.getKeys(entity)){
-            nearbyEntities.addAll(this.buckets.get(key));
+            if (this.buckets.containsKey(key)){
+                nearbyEntities.addAll(this.buckets.get(key));
+            }
         }
         return nearbyEntities;
     }

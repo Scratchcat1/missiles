@@ -35,7 +35,7 @@ public class World{
             world.step(1);
             world.debugOutput(i);
             try{
-                TimeUnit.MILLISECONDS.sleep(1000);
+                TimeUnit.MILLISECONDS.sleep(200);
             } catch (Exception e) {}
         }
     }
@@ -81,6 +81,8 @@ public class World{
 
         this.updateAll(timeStep);
 
+        this.runCollisions();
+
         this.removeDestroyed();
     }
 
@@ -97,6 +99,18 @@ public class World{
         for (Explosion explosion : this.explosions){
             explosion.update(timeStep);
         }
+    }
+
+    public void runCollisions(){
+        // SpatialHasher spatialHasher = new SpatialHasher(new double[]{1, 1, 1});
+        // spatialHasher.add(this.launchPlatforms.get(0));
+        // if (this.missiles.size() > 0){
+        //     spatialHasher.add(this.missiles.get(0));
+        // }
+        // System.out.println(spatialHasher.get(this.launchPlatforms.get(0)));
+        // //System.out.println(spatialHasher.buckets.toString());
+        // spatialHasher = null;
+        // System.gc();
     }
 
     protected void removeDestroyed(){
