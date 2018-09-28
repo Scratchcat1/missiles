@@ -1,16 +1,17 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class SpatialHasher{
-    HashMap<int[],ArrayList<Entity>> buckets;
+    HashMap<String,ArrayList<Entity>> buckets;
     double[] bucketSize;
 
     public SpatialHasher(double[] bucketSize){
-        this.buckets = new HashMap<int[],ArrayList<Entity>>();
+        this.buckets = new HashMap<String,ArrayList<Entity>>();
         this.bucketSize = bucketSize;
     }
 
-    public ArrayList<int[]> getKeys(Entity entity){
+    public ArrayList<String> getKeys(Entity entity){
         Vector position = entity.getPosition();
         Vector minPosition = position.clone();
         Vector maxPosition = position.clone();
@@ -28,14 +29,14 @@ public class SpatialHasher{
         }
 
         boolean complete = false;
-        int[] counterBucket = new int[position.length()];
-        ArrayList<int[]> keys = new ArrayList<int[]>();
+        int[] counterBucket = minBucket.clone();
+        ArrayList<String> keys = new ArrayList<String>();
 
         if (entity.getCollisionRadius() == 0){
-            keys.add(minBucket.clone());
+            keys.add(Arrays.toString(minBucket));
         } else {
             while (!complete){
-                keys.add(counterBucket.clone());
+                keys.add(Arrays.toString(counterBucket));
                 counterBucket[0] += 1;
                 for (int i = 0; i < counterBucket.length; i++){
                     if (counterBucket[i] == maxBucket[i] + 1){
@@ -49,12 +50,12 @@ public class SpatialHasher{
                 }
             }
         }
-
+        
         return keys;
     }
 
     public void add(Entity entity){
-        for (int[] key : this.getKeys(entity)){
+        for (String key : this.getKeys(entity)){
             if (!this.buckets.containsKey(key)){
                 this.buckets.put(key, new ArrayList<Entity>());
             }
@@ -64,7 +65,7 @@ public class SpatialHasher{
 
     public ArrayList<Entity> get(Entity entity){
         ArrayList<Entity> nearbyEntities = new ArrayList<Entity>();
-        for (int[] key : this.getKeys(entity)){
+        for (String key : this.getKeys(entity)){
             if (this.buckets.containsKey(key)){
                 nearbyEntities.addAll(this.buckets.get(key));
             }
