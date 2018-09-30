@@ -9,7 +9,7 @@ public class Entity{
     public Entity(double mass, int health, int maxHealth){
         this.mass = mass;
         this.health = health;
-        this.health = maxHealth;
+        this.maxHealth = maxHealth;
     }
 
     public void setPosition(Vector newPosition){
@@ -69,6 +69,11 @@ public class Entity{
 
     public void move(double timeStep){
         this.position = this.position.add(this.velocity.mult(timeStep));
+
+        if (this.getPosition().get(2) < 0){
+            this.getPosition().set(2, 0);
+            this.setVelocity(new Vector(3));
+        }
     }
 
     /** Updates kinetic properties of entity while attached to another object. Override to pass information to children */
@@ -98,6 +103,15 @@ public class Entity{
     /** Return the distance from the position vector to the most distance point of the entity. Default is to assume the entity is a point object */
     public double getCollisionRadius(){
         return 0;
+    }
+
+    public boolean isTouching(Entity otherEntity){
+        double radius = Math.max(this.getCollisionRadius(), otherEntity.getCollisionRadius());
+        if (this.getPosition().distance(otherEntity.getPosition()) <= radius){
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public void status(){

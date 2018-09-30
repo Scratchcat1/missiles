@@ -6,7 +6,7 @@ public class Targeting{
     }
 
     public boolean shouldLaunch(Warhead warhead){
-        if (warhead.getPosition().get(2) > 7000){
+        if (warhead.getPosition().get(2) > 4000){
             return true;
         }
 

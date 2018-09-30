@@ -4,7 +4,7 @@ public class Armory{
     public static ArrayList<Warhead> createBasicWarheads(int count){
         ArrayList<Warhead> warheads = new ArrayList<Warhead>();
         for (int i = 0; i < count; i++){
-            warheads.add(new Warhead(10, 30, 30, 1000, 100));
+            warheads.add(new Warhead(10, 30, 30, 100, 1000, 200));
         }
         return warheads;
     }

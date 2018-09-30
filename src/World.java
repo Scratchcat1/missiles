@@ -31,11 +31,11 @@ public class World{
             world.addLaunchPlatform(launchPlatform);
         }
 
-        for (int i = 0; i < 1000; i++){
+        for (int i = 0; i < 10000; i++){
             world.step(1);
             world.debugOutput(i);
             try{
-                TimeUnit.MILLISECONDS.sleep(2000);
+                TimeUnit.MILLISECONDS.sleep(300);
             } catch (Exception e) {}
         }
     }
@@ -102,15 +102,28 @@ public class World{
     }
 
     public void runCollisions(){
-        SpatialHasher spatialHasher = new SpatialHasher(new double[]{1, 1, 1});
-        spatialHasher.add(this.launchPlatforms.get(0));
-        if (this.missiles.size() > 0){
-            spatialHasher.add(this.missiles.get(0));
-            spatialHasher.add(this.missiles.get(1));
+        SpatialHasher spatialHasher = new SpatialHasher(new double[]{100, 100, 100});
+
+        for (LaunchPlatform launchPlatform : this.launchPlatforms){
+            spatialHasher.add(launchPlatform);
         }
-        System.out.println(spatialHasher.get(this.missiles.get(0)));
+        for (Missile missile : this.missiles){
+            spatialHasher.add(missile);
+        }
+        for (Warhead warhead : this.warheads){
+            spatialHasher.add(warhead);
+        }
         
-        System.out.println(spatialHasher.buckets.toString());
+        for (Explosion explosion : this.explosions){
+            ArrayList<Entity> nearbyEntities = spatialHasher.get(explosion);
+            for (Entity entity : nearbyEntities){
+                if (explosion.isTouching(entity)){
+                    int damage = explosion.getPointDamage(entity.getPosition());
+                    System.out.println(damage);
+                    entity.modifyHealth(-damage);
+                }
+            }
+        }
     }
 
     protected void removeDestroyed(){
@@ -138,7 +151,14 @@ public class World{
 
         System.out.println("Warheads");
         for (Warhead warhead : this.warheads){
+            if (this.explosions.size() == 0){
+                this.explosions.add(warheads.get(0).detonate());
+            }
             warhead.status();
+        }
+        System.out.println("Explosions");
+        for (Explosion explosion : this.explosions){
+            explosion.status();
         }
     }
 }

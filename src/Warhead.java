@@ -4,8 +4,9 @@ public class Warhead extends Entity{
     double detonationSpeed;
     static double ACCIDENTAL_DETONATION_PROBABILITY = 0.01;
 
-    public Warhead(double mass, int health, int maxHealth, double detonationRadius, double detonationSpeed){
+    public Warhead(double mass, int health, int maxHealth, int damage, double detonationRadius, double detonationSpeed){
         super(mass, health, maxHealth);
+        this.damage = damage;
         this.detonationRadius = detonationRadius;
         this.detonationSpeed = detonationSpeed;
     }
