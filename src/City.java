@@ -1,6 +1,6 @@
 public class City extends Entity{
-    static double GROWTH_RATE = 1.1;
-    double radius;
+    private static double GROWTH_RATE = 1.1;
+    private double radius;
 
     public City(int health){
         super(Double.POSITIVE_INFINITY, health, health);
@@ -9,5 +9,9 @@ public class City extends Entity{
     public void update(double timeStep){
         int healthChange = (int) (this.getHealth() * City.GROWTH_RATE * timeStep);
         this.modifyHealth(healthChange);
+    }
+
+    public double getCollisionRadius(){
+        return this.radius;
     }
 }

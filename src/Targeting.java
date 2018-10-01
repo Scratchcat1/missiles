@@ -1,5 +1,5 @@
 public class Targeting{
-    Vector targetPosition;
+    private Vector targetPosition;
 
     public Targeting(Vector targetPosition){
         this.targetPosition = targetPosition;

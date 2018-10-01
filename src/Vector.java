@@ -1,7 +1,7 @@
 import java.util.Arrays;
 
 public class Vector{
-    double[] vector;
+    private double[] vector;
 
     public Vector(int length){
         this.vector = new double[length];

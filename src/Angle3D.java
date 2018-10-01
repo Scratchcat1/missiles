@@ -1,5 +1,5 @@
 public class Angle3D{
-    double[] angle;
+    private double[] angle;
     // [Pitch, Yaw, Roll]
 
     public Angle3D(){

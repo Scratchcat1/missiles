@@ -1,12 +1,12 @@
 public class Explosion extends Entity{
-    int damage;
-    double detonationRadius;
-    double detonationSpeed;
-    double currentRadius;
+    private int damage;
+    private double detonationRadius;
+    private double detonationSpeed;
+    private double currentRadius;
 
     public Explosion(Vector position, int damage, double detonationRadius, double detonationSpeed){
         super(Double.POSITIVE_INFINITY, 1, 1);
-        this.position = position;
+        this.setPosition(position);
         this.damage = damage;
         this.detonationRadius = detonationRadius;
         this.detonationSpeed = detonationSpeed;

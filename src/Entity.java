@@ -1,10 +1,10 @@
 public class Entity{
-    Vector position = new Vector(3);
-    Vector velocity = new Vector(3);
-    Angle3D angle = new Angle3D();
-    double mass;
-    int health;
-    int maxHealth;
+    private Vector position = new Vector(3);
+    private Vector velocity = new Vector(3);
+    private Angle3D angle = new Angle3D();
+    private double mass;
+    private int health;
+    private int maxHealth;
 
     public Entity(double mass, int health, int maxHealth){
         this.mass = mass;
@@ -52,6 +52,11 @@ public class Entity{
 
     public double getMass(){
         return this.mass;
+    }
+
+    //** Return the mass of the object plus any child objects */
+    public double getTotalMass(){
+        return this.getMass();
     }
 
     public void setHealth(int health){

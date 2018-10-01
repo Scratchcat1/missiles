@@ -4,12 +4,12 @@ import java.util.concurrent.TimeUnit;
 public class World{
     static double airResistance = 0.001;
     static double gravAccel = -9.8;
-    ArrayList<City> cities;
-    ArrayList<LaunchPlatform> launchPlatforms;
+    private ArrayList<City> cities;
+    private ArrayList<LaunchPlatform> launchPlatforms;
     // ArrayList<Launcher> launchers;
-    ArrayList<Missile> missiles;
-    ArrayList<Warhead> warheads;
-    ArrayList<Explosion> explosions;
+    private ArrayList<Missile> missiles;
+    private ArrayList<Warhead> warheads;
+    private ArrayList<Explosion> explosions;
 
     public World(){
         this.reset();
@@ -119,7 +119,6 @@ public class World{
             for (Entity entity : nearbyEntities){
                 if (explosion.isTouching(entity)){
                     int damage = explosion.getPointDamage(entity.getPosition());
-                    System.out.println(damage);
                     entity.modifyHealth(-damage);
                 }
             }

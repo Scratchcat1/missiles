@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Launcher extends Entity{
-    int maxCapacity;
-    ArrayList<Missile> missiles;
+    private int maxCapacity;
+    private ArrayList<Missile> missiles;
     
     public Launcher(double launcherMass, int health, int maxHealth, int maxCapacity){
         super(launcherMass, health, maxHealth);
@@ -28,8 +28,8 @@ public class Launcher extends Entity{
         return this.missiles.size();
     }
 
-    public double getMass(){
-        double totalMass = this.mass;
+    public double getTotalMass(){
+        double totalMass = this.getMass();
         for (Missile missile : this.missiles){
             totalMass += missile.getMass();
         }

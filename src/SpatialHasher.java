@@ -3,8 +3,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class SpatialHasher{
-    HashMap<String,ArrayList<Entity>> buckets;
-    double[] bucketSize;
+    private HashMap<String,ArrayList<Entity>> buckets;
+    private double[] bucketSize;
 
     public SpatialHasher(double[] bucketSize){
         this.buckets = new HashMap<String,ArrayList<Entity>>();

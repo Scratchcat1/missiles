@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
 public class Missile extends Entity{
-    ArrayList<Warhead> warheads;
-    ArrayList<Motor> motors;
-    Targeting targeting;
+    private ArrayList<Warhead> warheads;
+    private ArrayList<Motor> motors;
+    private Targeting targeting;
 
     public Missile(double missileMass, int health, int maxHealth, ArrayList<Warhead> warheads, ArrayList<Motor> motors, Targeting targeting){
         super(missileMass, health, maxHealth);
@@ -52,13 +52,13 @@ public class Missile extends Entity{
         return this.warheads.size();
     }
 
-    public double getMass(){
-        double totalMass = this.mass;
+    public double getTotalMass(){
+        double totalMass = this.getMass();
         for (Warhead warhead : this.warheads){
             totalMass += warhead.getMass();
         }
         for (Motor motor : this.motors){
-            totalMass += motor.getMass();
+            totalMass += motor.getTotalMass();
         }
         return totalMass;
     }

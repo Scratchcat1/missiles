@@ -1,8 +1,8 @@
 public class Warhead extends Entity{
-    int damage;
-    double detonationRadius;
-    double detonationSpeed;
-    static double ACCIDENTAL_DETONATION_PROBABILITY = 0.01;
+    private int damage;
+    private double detonationRadius;
+    private double detonationSpeed;
+    private static double ACCIDENTAL_DETONATION_PROBABILITY = 0.01;
 
     public Warhead(double mass, int health, int maxHealth, int damage, double detonationRadius, double detonationSpeed){
         super(mass, health, maxHealth);

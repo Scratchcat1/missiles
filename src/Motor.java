@@ -1,10 +1,10 @@
 public class Motor extends Entity{
-    double remainingFuel = 1;
-    double fuelConsumption;
-    double fuelMass;
-    double force;
-    double dutyCycle;
-    double minDutyCycle;
+    private double remainingFuel = 1;
+    private double fuelConsumption;
+    private double fuelMass;
+    private double force;
+    private double dutyCycle;
+    private double minDutyCycle;
 
     public Motor(double mass, int health, int maxHealth, double fuelConsumption, double fuelMass, double force, double minDutyCycle){
         super(mass, health, maxHealth);
@@ -15,7 +15,7 @@ public class Motor extends Entity{
     }
 
     public void setDutyCycle(double newDutyCycle){
-        this.dutyCycle = Math.max(newDutyCycle, this.minDutyCycle);
+        this.dutyCycle = Math.min(Math.max(newDutyCycle, this.minDutyCycle), 1.0);
     }
 
     public Vector getForce(){
@@ -30,7 +30,7 @@ public class Motor extends Entity{
         this.remainingFuel -= this.fuelConsumption * timeStep;
     }
 
-    public double getMass(){
-        return this.mass + this.remainingFuel * this.fuelMass;
+    public double getTotalMass(){
+        return this.getMass() + this.remainingFuel * this.fuelMass;
     }
 }

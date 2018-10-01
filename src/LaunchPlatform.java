@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 
 public class LaunchPlatform extends Entity {
-    ArrayList<Launcher> launchers;
-    ArrayList<Motor> motors;
-    Targeting targeting;
+    private ArrayList<Launcher> launchers;
+    private ArrayList<Motor> motors;
+    private Targeting targeting;
 
     public LaunchPlatform(double launchPlatformMass, int health, int maxHealth, ArrayList<Launcher> launchers, ArrayList<Motor> motors, Targeting targeting){
         super(launchPlatformMass, health, maxHealth);
@@ -39,13 +39,13 @@ public class LaunchPlatform extends Entity {
         return launchedMissiles;
     }
 
-    public double getMass(){
-        double totalMass = this.mass;
+    public double getTotalMass(){
+        double totalMass = this.getMass();
         for (Launcher launcher : this.launchers){
-            totalMass += launcher.getMass();
+            totalMass += launcher.getTotalMass();
         }
         for (Motor motor : this.motors){
-            totalMass += motor.getMass();
+            totalMass += motor.getTotalMass();
         }
         return totalMass;
     }
