@@ -93,9 +93,9 @@ Viewer:
 
 
 
-TASK LIST
-    - [x] Get warheads to detonate on command
-    - [ ] Allow rotation of motors
-    - [ ] @Override stuff
-    - [ ] update Targeting
+TASK LIST:
+    - [x] Get warheads to detonate on command  
+    - [ ] Allow rotation of motors  
+    - [ ] @Override stuff  
+    - [ ] update Targeting  
 
