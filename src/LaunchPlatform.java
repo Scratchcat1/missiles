@@ -22,6 +22,7 @@ public class LaunchPlatform extends Entity {
 
         this.applyForce(motorForce, airResistance, gravAccel, timeStep);
         this.move(timeStep);
+        this.rotate(this.targeting.getRotationRate(this), timeStep);
 
         for (Motor motor : this.motors){
             motor.updateKinetics(this.getPosition(), this.getVelocity(), this.getAngle());

@@ -50,7 +50,7 @@ public class Entity{
             double rotationLimit = this.rotationRateLimit.get(i); // Disabled for now. / this.getTotalMass();
             rotationAngle.set(i, timeStep * Math.max(-rotationLimit, Math.min(rotationLimit, rotationVelocity.get(i))));
         }
-        this.angle.rotate(rotationAngle);   
+        this.angle = this.angle.rotate(rotationAngle);   
     }
 
     public void setMass(double mass){
@@ -127,11 +127,9 @@ public class Entity{
     }
 
     public void status(){
-        System.out.print("Pos");
-        this.position.print();
-        System.out.print("Vel");
-        this.velocity.print();
-        System.out.print("Ang");
-        this.angle.toVector(1).print();
+        System.out.println("Pos: " + this.position.toString());
+        System.out.println("Vel: " + this.velocity.toString());
+        System.out.println("Ang: " + this.angle.toString());
+        System.out.println("Ang(vec) " + this.angle.toVector(1).toString());
     }
 }

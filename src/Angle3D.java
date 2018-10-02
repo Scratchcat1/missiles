@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Angle3D{
     private double[] angle;
     // [Pitch, Yaw, Roll]
@@ -36,5 +38,9 @@ public class Angle3D{
             newAngle.set(i, (this.angle[i] + rotationAngle.get(i)) % (2 * Math.PI));
         }
         return newAngle;
+    }
+
+    public String toString(){
+        return "Angle3D:" + Arrays.toString(this.angle);
     }
 }

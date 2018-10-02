@@ -78,7 +78,7 @@ public class Vector{
         return Math.sqrt(sum);
     }
 
-    public void print(){
-        System.out.println(Arrays.toString(this.vector));
+    public String toString(){
+        return "Vector:" + Arrays.toString(this.vector);
     }
 }

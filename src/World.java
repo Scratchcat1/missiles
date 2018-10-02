@@ -35,7 +35,7 @@ public class World{
             world.step(1);
             world.debugOutput(i);
             try{
-                TimeUnit.MILLISECONDS.sleep(300);
+                TimeUnit.MILLISECONDS.sleep(2000);
             } catch (Exception e) {}
         }
     }

@@ -93,13 +93,13 @@ Viewer:
 
 
 
-TASK LIST:
-    - [x] Get warheads to detonate on command:
-        Warheads now use targeting to detonate
-    - [ ] Allow rotation of Entities:
-        - [ ] Add rotationRateLimit
-        - [ ] ???
-        - [ ] Add targeting control of rotation
-    - [ ] @Override stuff  
-    - [ ] update Targeting  
+TASK LIST:  
+    - [X] Get warheads to detonate on command:  
+        Warheads now use targeting to detonate  
+    - [X] Allow rotation of Entities:  
+        - [X] Add rotationRateLimit  
+        - [ ] ???  
+        - [X] Add targeting control of rotation  
+    - [ ] @Override stuff    
+    - [ ] update Targeting    
 
