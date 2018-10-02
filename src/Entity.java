@@ -84,7 +84,7 @@ public class Entity{
 
         if (this.getPosition().get(2) < 0){
             this.getPosition().set(2, 0);
-            this.setVelocity(new Vector(3));
+            this.getVelocity().set(2, 0);
         }
     }
 

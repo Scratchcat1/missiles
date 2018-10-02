@@ -40,6 +40,7 @@ public class LaunchPlatform extends Entity {
         return launchedMissiles;
     }
 
+    @Override
     public double getTotalMass(){
         double totalMass = this.getMass();
         for (Launcher launcher : this.launchers){

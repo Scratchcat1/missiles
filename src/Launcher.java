@@ -28,6 +28,7 @@ public class Launcher extends Entity{
         return this.missiles.size();
     }
 
+    @Override
     public double getTotalMass(){
         double totalMass = this.getMass();
         for (Missile missile : this.missiles){
@@ -36,6 +37,7 @@ public class Launcher extends Entity{
         return totalMass;
     }
 
+    @Override
     public void updateKinetics(Vector position, Vector velocity, Angle3D angle){
         this.setPosition(position);
         this.setVelocity(velocity);

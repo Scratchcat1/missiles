@@ -53,6 +53,7 @@ public class Missile extends Entity{
         return this.warheads.size();
     }
 
+    @Override
     public double getTotalMass(){
         double totalMass = this.getMass();
         for (Warhead warhead : this.warheads){
@@ -64,6 +65,7 @@ public class Missile extends Entity{
         return totalMass;
     }
 
+    @Override
     public void updateKinetics(Vector position, Vector velocity, Angle3D angle){
         this.setPosition(position);
         this.setVelocity(velocity);

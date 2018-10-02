@@ -17,9 +17,9 @@ public class World{
 
     public static void main(String[] args){
         World world = new World();
-        double[] maxPositionArray = {10000, 10000, 10000};
+
         Vector minPosition = new Vector(3);
-        Vector maxPosition = new Vector(maxPositionArray);
+        Vector maxPosition = new Vector(new double[]{10000, 10000, 10000});
 
         for (City city : Armory.createBasicCities(10)){
             city.randomisePosition(minPosition, maxPosition);
@@ -33,9 +33,9 @@ public class World{
 
         for (int i = 0; i < 10000; i++){
             world.step(1);
-            world.debugOutput(i);
+            //world.debugOutput(i);
             try{
-                TimeUnit.MILLISECONDS.sleep(2000);
+                TimeUnit.MILLISECONDS.sleep(0);
             } catch (Exception e) {}
         }
     }
