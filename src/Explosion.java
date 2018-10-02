@@ -5,7 +5,7 @@ public class Explosion extends Entity{
     private double currentRadius;
 
     public Explosion(Vector position, int damage, double detonationRadius, double detonationSpeed){
-        super(Double.POSITIVE_INFINITY, 1, 1);
+        super(Double.POSITIVE_INFINITY, 1, 1, new Angle3D(new double[]{0, 0, 0}));
         this.setPosition(position);
         this.damage = damage;
         this.detonationRadius = detonationRadius;

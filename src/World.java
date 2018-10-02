@@ -72,7 +72,7 @@ public class World{
             this.warheads.addAll(missile.launchWarheads());
         }
         for (Warhead warhead : this.warheads){
-            this.explosions.addAll(warhead.detonate());
+            this.explosions.addAll(warhead.launchExplosions());
         }
 
         for (LaunchPlatform launchPlatform : this.launchPlatforms){

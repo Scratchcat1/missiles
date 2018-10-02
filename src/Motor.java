@@ -7,7 +7,7 @@ public class Motor extends Entity{
     private double minDutyCycle;
 
     public Motor(double mass, int health, int maxHealth, double fuelConsumption, double fuelMass, double force, double minDutyCycle){
-        super(mass, health, maxHealth);
+        super(mass, health, maxHealth, new Angle3D(new double[]{0, 0, 0}));
         this.fuelConsumption = fuelConsumption;
         this.fuelMass = fuelMass;
         this.force = force;

@@ -47,8 +47,8 @@ public class Entity{
     public void rotate(Angle3D rotationVelocity, double timeStep){
         Angle3D rotationAngle = new Angle3D();
         for (int i = 0; i < 3; i++){
-            double rotationLimit = this.rotationRateLimit.get(i) / this.getTotalMass();
-            rotationAngle.set(i, timeStep * Math.min(rotationLimit, rotationVelocity.get(i)));
+            double rotationLimit = this.rotationRateLimit.get(i); // Disabled for now. / this.getTotalMass();
+            rotationAngle.set(i, timeStep * Math.max(-rotationLimit, Math.min(rotationLimit, rotationVelocity.get(i))));
         }
         this.angle.rotate(rotationAngle);   
     }

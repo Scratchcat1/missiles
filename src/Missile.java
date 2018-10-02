@@ -5,8 +5,8 @@ public class Missile extends Entity{
     private ArrayList<Motor> motors;
     private Targeting targeting;
 
-    public Missile(double missileMass, int health, int maxHealth, ArrayList<Warhead> warheads, ArrayList<Motor> motors, Targeting targeting){
-        super(missileMass, health, maxHealth);
+    public Missile(double missileMass, int health, int maxHealth, Angle3D rotationRateLimit, ArrayList<Warhead> warheads, ArrayList<Motor> motors, Targeting targeting){
+        super(missileMass, health, maxHealth, rotationRateLimit);
         this.warheads = warheads;
         this.motors = motors;
         this.targeting = targeting;

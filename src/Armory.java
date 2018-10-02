@@ -4,7 +4,7 @@ public class Armory{
     public static ArrayList<Warhead> createBasicWarheads(int count){
         ArrayList<Warhead> warheads = new ArrayList<Warhead>();
         for (int i = 0; i < count; i++){
-            warheads.add(new Warhead(10, 30, 30, 100, 1000, 200));
+            warheads.add(new Warhead(10, 30, 30, new Angle3D(new double[]{0.1, 0.1, 0.1}), 100, 1000, 200, new Targeting(new Vector(3))));
         }
         return warheads;
     }
@@ -20,7 +20,7 @@ public class Armory{
     public static ArrayList<Missile> createBasicMissiles(int count){
         ArrayList<Missile> missiles = new ArrayList<Missile>();
         for (int i = 0; i < count; i++){
-            missiles.add(new Missile(300, 100, 100, Armory.createBasicWarheads(3), Armory.createBasicMotors(1), new Targeting(new Vector(3))));
+            missiles.add(new Missile(300, 100, 100, new Angle3D(new double[]{0.1, 0.1, 0.1}), Armory.createBasicWarheads(3), Armory.createBasicMotors(1), new Targeting(new Vector(3))));
         }
         return missiles;
     }
@@ -28,7 +28,7 @@ public class Armory{
     public static ArrayList<Launcher> createBasicLaunchers(int count){
         ArrayList<Launcher> launchers = new ArrayList<Launcher>();
         for (int i = 0; i < count; i++){
-            Launcher launcher = new Launcher(200, 200, 200, 10);
+            Launcher launcher = new Launcher(200, 200, 200, new Angle3D(new double[]{0.1, 0.1, 0.1}), 10);
             for (Missile missile : Armory.createBasicMissiles(3)){
                 launcher.addMissile(missile);
             }
@@ -41,7 +41,7 @@ public class Armory{
     public static ArrayList<LaunchPlatform> createBasicLaunchPlatforms(int count){
         ArrayList<LaunchPlatform> launchPlatforms = new ArrayList<LaunchPlatform>();
         for (int i = 0; i < count; i++){
-            launchPlatforms.add(new LaunchPlatform(10000, 1000, 1000, Armory.createBasicLaunchers(2), Armory.createBasicMotors(30), new Targeting(new Vector(3))));
+            launchPlatforms.add(new LaunchPlatform(10000, 1000, 1000, new Angle3D(new double[]{0.1, 0.1, 0.1}), Armory.createBasicLaunchers(2), Armory.createBasicMotors(30), new Targeting(new Vector(3))));
         }
         return launchPlatforms;
     }

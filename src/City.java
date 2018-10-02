@@ -3,7 +3,7 @@ public class City extends Entity{
     private double radius;
 
     public City(int health){
-        super(Double.POSITIVE_INFINITY, health, health);
+        super(Double.POSITIVE_INFINITY, health, health, new Angle3D());
     }
 
     public void update(double timeStep){

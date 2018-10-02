@@ -5,8 +5,8 @@ public class LaunchPlatform extends Entity {
     private ArrayList<Motor> motors;
     private Targeting targeting;
 
-    public LaunchPlatform(double launchPlatformMass, int health, int maxHealth, ArrayList<Launcher> launchers, ArrayList<Motor> motors, Targeting targeting){
-        super(launchPlatformMass, health, maxHealth);
+    public LaunchPlatform(double launchPlatformMass, int health, int maxHealth, Angle3D rotationRateLimit, ArrayList<Launcher> launchers, ArrayList<Motor> motors, Targeting targeting){
+        super(launchPlatformMass, health, maxHealth, rotationRateLimit);
         this.launchers = launchers;
         this.motors = motors;
         this.targeting = targeting;

@@ -4,8 +4,8 @@ public class Launcher extends Entity{
     private int maxCapacity;
     private ArrayList<Missile> missiles;
     
-    public Launcher(double launcherMass, int health, int maxHealth, int maxCapacity){
-        super(launcherMass, health, maxHealth);
+    public Launcher(double launcherMass, int health, int maxHealth, Angle3D rotationRateLimit, int maxCapacity){
+        super(launcherMass, health, maxHealth, rotationRateLimit);
         this.maxCapacity = maxCapacity;
         this.missiles = new ArrayList<>();
     }
