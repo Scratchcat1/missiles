@@ -72,6 +72,14 @@ Angles:
                 health
                 children
 
+    manuverability:
+        Only defined as a limit, no acceleration.
+        Applied on a per Entity basis
+        the larger the mass of the Entity the slower the maximum rotation rate.
+        Defined for all 3 angles.
+        Excess rotation commands will be limited to the maximum.
+        Rotation commands will be run with the speed of rotation in rads per second.
+
 
 
 Viewer:
@@ -82,3 +90,12 @@ Viewer:
         convert all world objects into descriptive objects (i.e. type, location, children etc. ) in a tree
 
     Convert coordinates into screen coordiantes.
+
+
+
+TASK LIST
+    - [x] Get warheads to detonate on command
+    - [ ] Allow rotation of motors
+    - [ ] @Override stuff
+    - [ ] update Targeting
+

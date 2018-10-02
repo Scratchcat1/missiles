@@ -55,7 +55,7 @@ public class Missile extends Entity{
     public double getTotalMass(){
         double totalMass = this.getMass();
         for (Warhead warhead : this.warheads){
-            totalMass += warhead.getMass();
+            totalMass += warhead.getTotalMass();
         }
         for (Motor motor : this.motors){
             totalMass += motor.getTotalMass();

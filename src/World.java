@@ -71,6 +71,9 @@ public class World{
         for (Missile missile : this.missiles){
             this.warheads.addAll(missile.launchWarheads());
         }
+        for (Warhead warhead : this.warheads){
+            this.explosions.addAll(warhead.detonate());
+        }
 
         for (LaunchPlatform launchPlatform : this.launchPlatforms){
             //update targeting
@@ -138,9 +141,6 @@ public class World{
         System.out.println("LPS");
         for (LaunchPlatform launchPlatform : this.launchPlatforms){
             launchPlatform.status();
-            for (Launcher launcher : launchPlatform.launchers){
-                System.out.println(launcher.getRemainingMissiles());
-            }
         }
 
         System.out.println("Missiles");
@@ -150,9 +150,6 @@ public class World{
 
         System.out.println("Warheads");
         for (Warhead warhead : this.warheads){
-            if (this.explosions.size() == 0){
-                this.explosions.add(warheads.get(0).detonate());
-            }
             warhead.status();
         }
         System.out.println("Explosions");

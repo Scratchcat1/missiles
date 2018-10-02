@@ -5,8 +5,8 @@ public class Angle3D{
     public Angle3D(){
         this.angle = new double[]{Math.PI/2, 0, 0};
     }
-    public Angle3D(double[] initialVector){
-        this.angle = initialVector.clone();
+    public Angle3D(double[] initialAngle){
+        this.angle = initialAngle.clone();
     }
 
     public Angle3D clone(){
@@ -19,7 +19,7 @@ public class Angle3D{
 
     public void set(int i, double value){
         this.angle[i] = value;
-    } 
+    }
 
     public Vector toVector(double scalar){
         Vector vector = new Vector(3);

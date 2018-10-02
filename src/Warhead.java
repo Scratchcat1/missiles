@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Warhead extends Entity{
     private int damage;
     private double detonationRadius;
@@ -16,8 +18,10 @@ public class Warhead extends Entity{
         this.move(timeStep);
     }
 
-    public Explosion detonate(){
+    public ArrayList<Explosion> detonate(){
         this.setHealth(0);
-        return new Explosion(this.getPosition(), this.damage, this.detonationRadius, this.detonationSpeed);
+        ArrayList<Explosion> explosions = new ArrayList<Explosion>();
+        explosions.add(new Explosion(this.getPosition(), this.damage, this.detonationRadius, this.detonationSpeed));
+        return explosions;
     }
 }

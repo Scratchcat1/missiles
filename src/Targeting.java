@@ -5,6 +5,14 @@ public class Targeting{
         this.targetPosition = targetPosition;
     }
 
+    public boolean shouldDetonate(Warhead warhead){
+        if (warhead.getPosition().get(2) < 200){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public boolean shouldLaunch(Warhead warhead){
         if (warhead.getPosition().get(2) > 4000){
             return true;

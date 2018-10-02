@@ -2,14 +2,16 @@ public class Entity{
     private Vector position = new Vector(3);
     private Vector velocity = new Vector(3);
     private Angle3D angle = new Angle3D();
+    private Angle3D rotationRateLimit = new Angle3D();
     private double mass;
     private int health;
     private int maxHealth;
 
-    public Entity(double mass, int health, int maxHealth){
+    public Entity(double mass, int health, int maxHealth, Angle3D rotationRateLimit){
         this.mass = mass;
         this.health = health;
         this.maxHealth = maxHealth;
+        this.rotationRateLimit = rotationRateLimit;
     }
 
     public void setPosition(Vector newPosition){
@@ -42,7 +44,12 @@ public class Entity{
         return this.angle;
     }
 
-    public void rotate(Angle3D rotationAngle){
+    public void rotate(Angle3D rotationVelocity, double timeStep){
+        Angle3D rotationAngle = new Angle3D();
+        for (int i = 0; i < 3; i++){
+            double rotationLimit = this.rotationRateLimit.get(i) / this.getTotalMass();
+            rotationAngle.set(i, timeStep * Math.min(rotationLimit, rotationVelocity.get(i)));
+        }
         this.angle.rotate(rotationAngle);   
     }
 
@@ -89,7 +96,7 @@ public class Entity{
     }
 
     public void applyForce(Vector motorForce, double airResistance, double gravAccel, double timeStep){
-        Vector acceleration = motorForce.mult( 1 / this.getMass());
+        Vector acceleration = motorForce.mult( 1 / this.getTotalMass());
         acceleration.set(2, gravAccel + acceleration.get(2));
 
         Vector airResistForce = new Vector(3);

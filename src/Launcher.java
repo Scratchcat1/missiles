@@ -31,7 +31,7 @@ public class Launcher extends Entity{
     public double getTotalMass(){
         double totalMass = this.getMass();
         for (Missile missile : this.missiles){
-            totalMass += missile.getMass();
+            totalMass += missile.getTotalMass();
         }
         return totalMass;
     }
