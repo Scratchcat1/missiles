@@ -26,7 +26,6 @@ public class Motor extends Entity{
         return this.getAngle().toVector(force);
     }
 
-    @Override
     public void update(double timeStep){
         this.remainingFuel -= this.fuelConsumption * timeStep;
     }

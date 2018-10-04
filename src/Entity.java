@@ -79,23 +79,7 @@ public class Entity{
         return this.health;
     }
 
-    public void move(double timeStep){
-        this.position = this.position.add(this.velocity.mult(timeStep));
-
-        if (this.getPosition().get(2) < 0){
-            this.getPosition().set(2, 0);
-            this.getVelocity().set(2, 0);
-        }
-    }
-
-    /** Updates kinetic properties of entity while attached to another object. Override to pass information to children */
-    public void updateKinetics(Vector position, Vector velocity, Angle3D angle){
-        this.setPosition(position);
-        this.setVelocity(velocity);
-        this.setAngle(angle);
-    }
-
-    public void applyForce(Vector motorForce, double airResistance, double gravAccel, double timeStep){
+    public Vector getAcceleration(Vector motorForce, double airResistance, double gravAccel, double timeStep){
         Vector acceleration = motorForce.mult( 1 / this.getTotalMass());
         acceleration.set(2, gravAccel + acceleration.get(2));
 
@@ -103,13 +87,32 @@ public class Entity{
         for (int i = 0; i < airResistForce.length(); i++){
             airResistForce.set(i, this.velocity.get(i) * Math.abs(this.velocity.get(i)) * airResistance * Math.pow(Math.E, -this.position.get(2)/15000));
         }
-        acceleration = acceleration.add(airResistForce.negation());
+        acceleration = acceleration.add(airResistForce.negative());
+
+        return acceleration;
+    }
+
+    /** Updates kinetic properties of entity while attached to another object. Override to pass information to children */
+    public void setKinetics(Vector position, Vector velocity, Angle3D angle){
+        this.setPosition(position);
+        this.setVelocity(velocity);
+        this.setAngle(angle);
+    }
+
+    public void updateKinetics(Vector motorForce, double airResistance, double gravAccel, double timeStep){
+        Vector acceleration = this.getAcceleration(motorForce, airResistance, gravAccel, timeStep);
+
+        this.position = this.position.add(this.velocity.mult(timeStep).add(acceleration.mult(0.5 * Math.pow(timeStep, 2))));  // p' = p + (ut + (a * 0.5 * t^2))
+        if (this.position.get(2) < 0){
+            this.position.set(2, 0);
+            this.velocity.set(2, 0);
+        }
 
         this.velocity = this.velocity.add(acceleration.mult(timeStep));
     }
 
-    public void update(double timeStep){
-        this.move(timeStep);
+    public void update(double airResistance, double gravAccel, double timeStep){
+        this.updateKinetics(new Vector(3), airResistance, gravAccel, timeStep);
     }
 
     /** Return the distance from the position vector to the most distance point of the entity. Default is to assume the entity is a point object */
@@ -127,9 +130,10 @@ public class Entity{
     }
 
     public void status(){
-        System.out.println("Pos: " + this.position.toString());
-        System.out.println("Vel: " + this.velocity.toString());
-        System.out.println("Ang: " + this.angle.toString());
-        System.out.println("Ang(vec) " + this.angle.toVector(1).toString());
+        System.out.println("Pos:      " + this.position.toString());
+        System.out.println("Vel:      " + this.velocity.toString());
+        System.out.println("Ang:      " + this.angle.toString());
+        System.out.println("Ang(vec): " + this.angle.toVector(1).toString());
+        System.out.println("Health:   " + this.health);
     }
 }

@@ -55,7 +55,7 @@ All objects are either free or stored in another object:
     If any object is damaged it damages the subcomponents to, if a warhead is damaged it may detonate, detonating warheads are made top level objects
             
             
-    updateKinetics is the inactive version of move, the caller of updateKinetics is in control. 
+    setKinetics is the inactive version of move, the caller of setKinetics is in control. 
 
 Angles:
     [pitch, yaw, roll]/[up/down, left/right, roll]
@@ -100,6 +100,6 @@ TASK LIST:
         - [x] Add rotationRateLimit  
         - [ ] ???  
         - [x] Add targeting control of rotation  
-    - [ ] @Override stuff    
+    - [X] @Override stuff    
     - [ ] update Targeting    
 

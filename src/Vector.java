@@ -47,7 +47,7 @@ public class Vector{
     }
 
     public Vector minus(Vector otherVector){
-        return this.add(otherVector.negation());
+        return this.add(otherVector.negative());
     }
 
     public Vector mult(double k){
@@ -66,7 +66,7 @@ public class Vector{
         return dotProduct;
     }
 
-    public Vector negation(){
+    public Vector negative(){
         return this.mult(-1);
     }
 

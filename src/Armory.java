@@ -42,7 +42,7 @@ public class Armory{
         ArrayList<LaunchPlatform> launchPlatforms = new ArrayList<LaunchPlatform>();
         for (int i = 0; i < count; i++){
             LaunchPlatform launchPlatform = new LaunchPlatform(10000, 1000, 1000, new Angle3D(new double[]{0.1, 0.1, 0.1}), Armory.createBasicLaunchers(2), Armory.createBasicMotors(30), new Targeting(new Vector(3)));
-            launchPlatform.setAngle(new Angle3D(new double[]{0, 0, 0}));
+            //launchPlatform.setAngle(new Angle3D(new double[]{0, 0, 0}));
             launchPlatforms.add(launchPlatform);
         }
         return launchPlatforms;

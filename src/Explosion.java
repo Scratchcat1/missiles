@@ -18,7 +18,6 @@ public class Explosion extends Entity{
         return damage;
     }
 
-    @Override
     public void update(double timeStep){
         this.currentRadius += this.detonationSpeed * timeStep;
         if (this.currentRadius >= this.detonationRadius){

@@ -15,17 +15,16 @@ public class Missile extends Entity{
     public void update(double airResistance, double gravAccel, double timeStep){
         Vector motorForce = new Vector(3);
         for (Motor motor : this.motors){
-            motor.setDutyCycle(this.targeting.getDutyCycle(motor, this.getPosition(), this.getVelocity()));
+            motor.setDutyCycle(this.targeting.getDutyCycle(motor));
             motor.update(timeStep);
             motorForce = motorForce.add(motor.getForce());
         }
 
-        this.applyForce(motorForce, airResistance, gravAccel, timeStep);
-        this.move(timeStep);
+        this.updateKinetics(motorForce, airResistance, gravAccel, timeStep);
         this.rotate(this.targeting.getRotationRate(this), timeStep);
 
         for (Motor motor : this.motors){
-            motor.updateKinetics(this.getPosition(), this.getVelocity(), this.getAngle());
+            motor.setKinetics(this.getPosition(), this.getVelocity(), this.getAngle());
         }
     }
 
@@ -33,7 +32,7 @@ public class Missile extends Entity{
         ArrayList<Integer> launchingWarheadPositions = new ArrayList<Integer>();
         for (int i = 0; i < this.warheads.size(); i++){
             Warhead warhead = this.warheads.get(i);
-            warhead.updateKinetics(this.getPosition(), this.getVelocity(), this.getAngle());
+            warhead.setKinetics(this.getPosition(), this.getVelocity(), this.getAngle());
 
             if (this.getRemainingWarheads() > 0 && this.targeting.shouldLaunch(warhead)){
                 launchingWarheadPositions.add(i);
@@ -66,17 +65,17 @@ public class Missile extends Entity{
     }
 
     @Override
-    public void updateKinetics(Vector position, Vector velocity, Angle3D angle){
+    public void setKinetics(Vector position, Vector velocity, Angle3D angle){
         this.setPosition(position);
         this.setVelocity(velocity);
         this.setAngle(angle);
         
         for (Motor motor : this.motors){
-            motor.updateKinetics(position, velocity, angle);
+            motor.setKinetics(position, velocity, angle);
         }
 
         for (Warhead warhead : this.warheads){
-            warhead.updateKinetics(position, velocity, angle);
+            warhead.setKinetics(position, velocity, angle);
         }
     }
 }

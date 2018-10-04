@@ -27,10 +27,10 @@ public class Targeting{
     }
 
     public Angle3D getRotationRate(Entity entity){
-        return new Angle3D(new double[]{0.1, 0.0, 0.0});
+        return new Angle3D(new double[]{0.0, 0.0, 0.0});
     }
 
-    public double getDutyCycle(Motor motor, Vector position, Vector velocity){
+    public double getDutyCycle(Motor motor){
         return 1.0;
     }
 }

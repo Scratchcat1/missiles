@@ -37,14 +37,12 @@ public class Launcher extends Entity{
         return totalMass;
     }
 
-    @Override
-    public void updateKinetics(Vector position, Vector velocity, Angle3D angle){
+    public void setKinetics(Vector position, Vector velocity){
         this.setPosition(position);
         this.setVelocity(velocity);
-        this.setAngle(angle);
 
         for (Missile missile : this.missiles){
-            missile.updateKinetics(position, velocity, angle);
+            missile.setKinetics(position, velocity, this.getAngle());
         }
     }
 }

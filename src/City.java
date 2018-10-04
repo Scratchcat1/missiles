@@ -6,7 +6,6 @@ public class City extends Entity{
         super(Double.POSITIVE_INFINITY, health, health, new Angle3D());
     }
 
-    @Override
     public void update(double timeStep){
         int healthChange = (int) (this.getHealth() * City.GROWTH_RATE * timeStep);
         this.modifyHealth(healthChange);

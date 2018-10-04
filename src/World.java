@@ -26,18 +26,23 @@ public class World{
             world.addCity(city);
         }
 
-        for (LaunchPlatform launchPlatform : Armory.createBasicLaunchPlatforms(1)){
+        for (LaunchPlatform launchPlatform : Armory.createBasicLaunchPlatforms(1000)){
             // launchPlatform.randomisePosition(minPosition, maxPosition);
             world.addLaunchPlatform(launchPlatform);
         }
-
+        
+        
         for (int i = 0; i < 10000; i++){
+            long startTime = System.nanoTime();
             world.step(1);
             //world.debugOutput(i);
             try{
                 TimeUnit.MILLISECONDS.sleep(0);
             } catch (Exception e) {}
+            long endTime = System.nanoTime();
+            System.out.println("Step " + String.format("%5d", i) + " took " + (endTime - startTime) + " nanoseconds");
         }
+
     }
 
     public void reset(){
@@ -105,7 +110,7 @@ public class World{
     }
 
     public void runCollisions(){
-        SpatialHasher spatialHasher = new SpatialHasher(new double[]{100, 100, 100});
+        SpatialHasher spatialHasher = new SpatialHasher(new double[]{1000, 1000, 1000});
 
         for (LaunchPlatform launchPlatform : this.launchPlatforms){
             spatialHasher.add(launchPlatform);

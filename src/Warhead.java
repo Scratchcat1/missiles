@@ -16,8 +16,7 @@ public class Warhead extends Entity{
     }
 
     public void update(double airResistance, double gravAccel, double timeStep){
-        this.applyForce(new Vector(3), airResistance, gravAccel, timeStep);
-        this.move(timeStep);
+        this.updateKinetics(new Vector(3), airResistance, gravAccel, timeStep);
         this.rotate(this.targeting.getRotationRate(this), timeStep);
     }
 
