@@ -1,3 +1,4 @@
+package simulation;
 public class Entity{
     private Vector position = new Vector(3);
     private Vector velocity = new Vector(3);

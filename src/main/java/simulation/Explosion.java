@@ -1,3 +1,4 @@
+package simulation;
 public class Explosion extends Entity{
     private int damage;
     private double detonationRadius;

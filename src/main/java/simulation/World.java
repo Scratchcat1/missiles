@@ -1,3 +1,4 @@
+package simulation;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
@@ -26,7 +27,7 @@ public class World {
             world.addCity(city);
         }
 
-        for (LaunchPlatform launchPlatform : Armory.createBasicLaunchPlatforms(1000)) {
+        for (LaunchPlatform launchPlatform : Armory.createBasicLaunchPlatforms(10)) {
             // launchPlatform.randomisePosition(minPosition, maxPosition);
             world.addLaunchPlatform(launchPlatform);
         }

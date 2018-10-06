@@ -1,3 +1,4 @@
+package simulation;
 public class City extends Entity{
     private static double GROWTH_RATE = 1.1;
     private double radius;

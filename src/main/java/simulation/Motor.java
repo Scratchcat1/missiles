@@ -1,3 +1,4 @@
+package simulation;
 public class Motor extends Entity{
     private double remainingFuel = 1;
     private double fuelConsumption;
