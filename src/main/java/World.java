@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 
-public class World{
+public class World {
     static double airResistance = 0.001;
     static double gravAccel = -9.8;
     private ArrayList<City> cities;
@@ -11,41 +11,42 @@ public class World{
     private ArrayList<Warhead> warheads;
     private ArrayList<Explosion> explosions;
 
-    public World(){
+    public World() {
         this.reset();
     }
 
-    public static void main(String[] args){
+    public static void main(String[] args) {
         World world = new World();
 
         Vector minPosition = new Vector(3);
         Vector maxPosition = new Vector(new double[]{10000, 10000, 10000});
 
-        for (City city : Armory.createBasicCities(10)){
+        for (City city : Armory.createBasicCities(10)) {
             city.randomisePosition(minPosition, maxPosition);
             world.addCity(city);
         }
 
-        for (LaunchPlatform launchPlatform : Armory.createBasicLaunchPlatforms(1000)){
+        for (LaunchPlatform launchPlatform : Armory.createBasicLaunchPlatforms(1000)) {
             // launchPlatform.randomisePosition(minPosition, maxPosition);
             world.addLaunchPlatform(launchPlatform);
         }
         
         
-        for (int i = 0; i < 10000; i++){
+        for (int i = 0; i < 10000; i++) {
             long startTime = System.nanoTime();
             world.step(1);
             //world.debugOutput(i);
-            try{
+            try {
                 TimeUnit.MILLISECONDS.sleep(0);
-            } catch (Exception e) {}
+            } catch (Exception e) {
+            }
             long endTime = System.nanoTime();
             System.out.println("Step " + String.format("%5d", i) + " took " + (endTime - startTime) + " nanoseconds");
         }
 
     }
 
-    public void reset(){
+    public void reset() {
         this.cities = new ArrayList<City>();
         this.launchPlatforms = new ArrayList<LaunchPlatform>();
         this.missiles = new ArrayList<Missile>();
@@ -53,37 +54,37 @@ public class World{
         this.explosions = new ArrayList<Explosion>();
     }
 
-    public void addCity(City city){
+    public void addCity(City city) {
         this.cities.add(city);
     }
 
-    public void addLaunchPlatform(LaunchPlatform launchPlatform){
+    public void addLaunchPlatform(LaunchPlatform launchPlatform) {
         this.launchPlatforms.add(launchPlatform);
     }
 
-    public void addMissiles(Missile missile){
+    public void addMissiles(Missile missile) {
         this.missiles.add(missile);
     }
 
-    public void addWarheads(Warhead warhead){
+    public void addWarheads(Warhead warhead) {
         this.warheads.add(warhead);
     }
 
-    public void step(double timeStep){
-        for (LaunchPlatform launchPlatform : this.launchPlatforms){
+    public void step(double timeStep) {
+        for (LaunchPlatform launchPlatform : this.launchPlatforms) {
             this.missiles.addAll(launchPlatform.launchMissiles());
         }
-        for (Missile missile : this.missiles){
+        for (Missile missile : this.missiles) {
             this.warheads.addAll(missile.launchWarheads());
         }
-        for (Warhead warhead : this.warheads){
+        for (Warhead warhead : this.warheads) {
             this.explosions.addAll(warhead.launchExplosions());
         }
 
-        for (LaunchPlatform launchPlatform : this.launchPlatforms){
+        for (LaunchPlatform launchPlatform : this.launchPlatforms) {
             //update targeting
         }
-        for (Missile missile : this.missiles){
+        for (Missile missile : this.missiles) {
             //update targeting
         }
 
@@ -94,38 +95,38 @@ public class World{
         this.removeDestroyed();
     }
 
-    public void updateAll(double timeStep){
-        for (LaunchPlatform launchPlatform : this.launchPlatforms){
+    public void updateAll(double timeStep) {
+        for (LaunchPlatform launchPlatform : this.launchPlatforms) {
             launchPlatform.update(World.airResistance, World.gravAccel, timeStep);
         }
-        for (Missile missile : this.missiles){
+        for (Missile missile : this.missiles) {
             missile.update(World.airResistance, World.gravAccel, timeStep);
         }
-        for (Warhead warhead : this.warheads){
+        for (Warhead warhead : this.warheads) {
             warhead.update(World.airResistance, World.gravAccel, timeStep);
         }
-        for (Explosion explosion : this.explosions){
+        for (Explosion explosion : this.explosions) {
             explosion.update(timeStep);
         }
     }
 
-    public void runCollisions(){
+    public void runCollisions() {
         SpatialHasher spatialHasher = new SpatialHasher(new double[]{1000, 1000, 1000});
 
-        for (LaunchPlatform launchPlatform : this.launchPlatforms){
+        for (LaunchPlatform launchPlatform : this.launchPlatforms) {
             spatialHasher.add(launchPlatform);
         }
-        for (Missile missile : this.missiles){
+        for (Missile missile : this.missiles) {
             spatialHasher.add(missile);
         }
-        for (Warhead warhead : this.warheads){
+        for (Warhead warhead : this.warheads) {
             spatialHasher.add(warhead);
         }
         
-        for (Explosion explosion : this.explosions){
+        for (Explosion explosion : this.explosions) {
             ArrayList<Entity> nearbyEntities = spatialHasher.get(explosion);
-            for (Entity entity : nearbyEntities){
-                if (explosion.isTouching(entity)){
+            for (Entity entity : nearbyEntities) {
+                if (explosion.isTouching(entity)) {
                     int damage = explosion.getPointDamage(entity.getPosition());
                     entity.modifyHealth(-damage);
                 }
@@ -133,7 +134,7 @@ public class World{
         }
     }
 
-    protected void removeDestroyed(){
+    protected void removeDestroyed() {
         this.cities.removeIf(item -> item.getHealth() <= 0);
         this.launchPlatforms.removeIf(item -> item.getHealth() <= 0);
         this.missiles.removeIf(item -> item.getHealth() <= 0);
@@ -141,24 +142,24 @@ public class World{
         this.explosions.removeIf(item -> item.getHealth() <= 0);
     }
 
-    public void debugOutput(int step){
+    public void debugOutput(int step) {
         System.out.println("-----------STEP" + step);
         System.out.println("LPS");
-        for (LaunchPlatform launchPlatform : this.launchPlatforms){
+        for (LaunchPlatform launchPlatform : this.launchPlatforms) {
             launchPlatform.status();
         }
 
         System.out.println("Missiles");
-        for (Missile missile : this.missiles){
+        for (Missile missile : this.missiles) {
             missile.status();
         }
 
         System.out.println("Warheads");
-        for (Warhead warhead : this.warheads){
+        for (Warhead warhead : this.warheads) {
             warhead.status();
         }
         System.out.println("Explosions");
-        for (Explosion explosion : this.explosions){
+        for (Explosion explosion : this.explosions) {
             explosion.status();
         }
     }
