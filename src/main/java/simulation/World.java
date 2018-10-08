@@ -17,21 +17,8 @@ public class World {
     }
 
     public static void main(String[] args) {
-        World world = new World();
-
-        Vector minPosition = new Vector();
-        Vector maxPosition = new Vector(new double[]{10000, 10000, 10000});
-
-        for (City city : Armory.createBasicCities(10)) {
-            city.randomisePosition(minPosition, maxPosition);
-            world.addCity(city);
-        }
-
-        for (LaunchPlatform launchPlatform : Armory.createBasicLaunchPlatforms(10)) {
-            // launchPlatform.randomisePosition(minPosition, maxPosition);
-            world.addLaunchPlatform(launchPlatform);
-        }
-        
+        World world = new World();  
+        world.setupBasic();      
         
         for (int i = 0; i < 10000; i++) {
             long startTime = System.nanoTime();
@@ -45,6 +32,21 @@ public class World {
             System.out.println("Step " + String.format("%5d", i) + " took " + (endTime - startTime) + " nanoseconds");
         }
 
+    }
+
+    public void setupBasic() {
+        Vector minPosition = new Vector();
+        Vector maxPosition = new Vector(new double[]{10000, 10000, 10000});
+
+        for (City city : Armory.createBasicCities(10)) {
+            city.randomisePosition(minPosition, maxPosition);
+            this.addCity(city);
+        }
+
+        for (LaunchPlatform launchPlatform : Armory.createBasicLaunchPlatforms(10)) {
+            // launchPlatform.randomisePosition(minPosition, maxPosition);
+            this.addLaunchPlatform(launchPlatform);
+        }
     }
 
     public void reset() {
@@ -141,6 +143,29 @@ public class World {
         this.missiles.removeIf(item -> item.getHealth() <= 0);
         this.warheads.removeIf(item -> item.getHealth() <= 0);
         this.explosions.removeIf(item -> item.getHealth() <= 0);
+    }
+
+    public Entity[] getState() {
+        Entity[] state = new Entity[this.cities.size() + this.launchPlatforms.size() + this.explosions.size() + this.missiles.size() + this.warheads.size()]; 
+        int pos = 0;
+        
+        for (City city : this.cities) {
+            state[pos++] = city;
+        }
+        for (LaunchPlatform launchPlatform : this.launchPlatforms) {
+            state[pos++] = launchPlatform;
+        }
+        for (Missile missile : this.missiles) {
+            state[pos++] = missile;
+        }
+        for (Warhead warhead : this.warheads) {
+            state[pos++] = warhead;
+        }
+        for (Explosion explosion : this.explosions) {
+            state[pos++] = explosion;
+        }
+        
+        return state;
     }
 
     public void debugOutput(int step) {

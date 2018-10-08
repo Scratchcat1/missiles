@@ -6,7 +6,7 @@ public class Angle3D{
     // [Pitch, Yaw, Roll]
 
     public Angle3D() {
-        this.angle = new double[]{Math.PI/2, 0, 0};
+        this.angle = new double[]{Math.PI/2 - 0.1, 0, 0};
     }
     public Angle3D(double[] initialAngle) {
         this.angle = initialAngle.clone();
