@@ -14,7 +14,7 @@ public class Missile extends Entity{
     }
 
     public void update(double airResistance, double gravAccel, double timeStep) {
-        Vector motorForce = new Vector(3);
+        Vector motorForce = new Vector();
         for (Motor motor : this.motors) {
             motor.setDutyCycle(this.targeting.getDutyCycle(motor));
             motor.update(timeStep);

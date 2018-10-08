@@ -25,7 +25,7 @@ public class Angle3D{
     }
 
     public Vector toVector(double scalar) {
-        Vector vector = new Vector(3);
+        Vector vector = new Vector();
         vector.set(2, scalar * Math.sin(this.angle[0]));
         double xyScalar = scalar * Math.cos(this.angle[0]);
         vector.set(0, xyScalar * Math.cos(this.angle[1]));

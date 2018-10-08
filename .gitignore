@@ -1,3 +1,4 @@
 src/*.class
 build/
 .vscode
+/**/*.class

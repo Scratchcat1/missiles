@@ -4,8 +4,8 @@ import java.util.Arrays;
 public class Vector{
     private double[] vector;
 
-    public Vector(int length) {
-        this.vector = new double[length];
+    public Vector() {
+        this.vector = new double[3];
     }
     public Vector(double[] initialVector) {
         this.vector = initialVector.clone();
@@ -16,7 +16,7 @@ public class Vector{
     }
 
     public int length() {
-        return this.vector.length;
+        return 3;
     }
 
     public double get(int i) {
@@ -29,7 +29,7 @@ public class Vector{
     
     public boolean equals(Vector otherVector) {
         boolean valid = true;
-        for (int i = 0; i < this.vector.length; i++) {
+        for (int i = 0; i < 3; i++) {
             if (this.vector[i] != otherVector.get(i)) {
                 valid = false;
                 break;
@@ -39,8 +39,8 @@ public class Vector{
     }
 
     public Vector add(Vector otherVector) {
-        Vector newVector = new Vector(this.vector.length);
-        for (int i = 0; i < this.vector.length; i++) {
+        Vector newVector = new Vector();
+        for (int i = 0; i < 3; i++) {
             double newValue = this.vector[i] + otherVector.get(i);
             newVector.set(i, newValue);
         }
@@ -52,8 +52,8 @@ public class Vector{
     }
 
     public Vector mult(double k) {
-        Vector newVector = new Vector(this.vector.length);
-        for (int i = 0; i < this.vector.length; i++) {
+        Vector newVector = new Vector();
+        for (int i = 0; i < 3; i++) {
             newVector.set(i, this.vector[i] * k);
         }
         return newVector;
@@ -61,7 +61,7 @@ public class Vector{
 
     public int mult(Vector otherVector) {
         int dotProduct = 0;
-        for (int i = 0; i < this.vector.length; i++) {
+        for (int i = 0; i < 3; i++) {
             dotProduct += this.vector[i] * otherVector.get(i);
         }
         return dotProduct;
@@ -73,7 +73,7 @@ public class Vector{
 
     public double distance(Vector otherVector) {
         int sum = 0;
-        for (int i = 0; i < this.vector.length; i++) {
+        for (int i = 0; i < 3; i++) {
             sum += Math.pow(Math.abs(this.vector[i] - otherVector.get(i)), 2);
         }
         return Math.sqrt(sum);
@@ -81,5 +81,9 @@ public class Vector{
 
     public String toString() {
         return "Vector:" + Arrays.toString(this.vector);
+    }
+
+    public double[] toArray() {
+        return this.vector;
     }
 }

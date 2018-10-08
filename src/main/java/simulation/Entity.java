@@ -1,7 +1,7 @@
 package simulation;
 public class Entity{
-    private Vector position = new Vector(3);
-    private Vector velocity = new Vector(3);
+    private Vector position = new Vector();
+    private Vector velocity = new Vector();
     private Angle3D angle = new Angle3D();
     private Angle3D rotationRateLimit = new Angle3D();
     private double mass;
@@ -84,11 +84,11 @@ public class Entity{
         Vector acceleration = motorForce.mult( 1 / this.getTotalMass());
         acceleration.set(2, gravAccel + acceleration.get(2));
 
-        Vector airResistForce = new Vector(3);
+        Vector airResistForce = new Vector();
         for (int i = 0; i < airResistForce.length(); i++) {
             airResistForce.set(i, this.velocity.get(i) * Math.abs(this.velocity.get(i)) * airResistance * Math.pow(Math.E, -this.position.get(2)/15000));
         }
-        acceleration = acceleration.add(airResistForce.negative());
+        acceleration = acceleration.minus(airResistForce);
 
         return acceleration;
     }
@@ -113,7 +113,7 @@ public class Entity{
     }
 
     public void update(double airResistance, double gravAccel, double timeStep) {
-        this.updateKinetics(new Vector(3), airResistance, gravAccel, timeStep);
+        this.updateKinetics(new Vector(), airResistance, gravAccel, timeStep);
     }
 
     /** Return the distance from the position vector to the most distance point of the entity. Default is to assume the entity is a point object */

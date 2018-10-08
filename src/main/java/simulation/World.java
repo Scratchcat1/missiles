@@ -19,7 +19,7 @@ public class World {
     public static void main(String[] args) {
         World world = new World();
 
-        Vector minPosition = new Vector(3);
+        Vector minPosition = new Vector();
         Vector maxPosition = new Vector(new double[]{10000, 10000, 10000});
 
         for (City city : Armory.createBasicCities(10)) {

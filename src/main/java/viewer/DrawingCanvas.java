@@ -1,6 +1,6 @@
 package viewer;
 
-import java.awt.Color;
+import java.awt.*;
 
 import javax.swing.JPanel;
 
@@ -28,7 +28,7 @@ public class DrawingCanvas extends JPanel {
 
     public void addShape(Shape shape) {
         if (this.numberOfShapes == this.shapes.length) {
-            Shapep[] temp = new Shape[shapes.length * 2];
+            Shape[] temp = new Shape[shapes.length * 2];
             for (int i = 0; i < this.shapes.length; i++) {
                 temp[i] = this.shapes[i];
             }
@@ -37,5 +37,15 @@ public class DrawingCanvas extends JPanel {
         
         this.shapes[this.numberOfShapes] = shape;
         this.numberOfShapes += 1;
+    }
+
+    public void paint(Graphics g){
+        Graphics2D g2 = (Graphics2D) g;
+        g2.setColor(Color.GREEN);
+        super.paintComponent(g);
+        
+        for (int i = 0; i < this.numberOfShapes; i++){
+            g2.draw(this.shapes[i]);
+        }
     }
 }
