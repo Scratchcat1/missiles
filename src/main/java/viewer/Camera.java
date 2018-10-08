@@ -10,7 +10,7 @@ public class Camera {
      *  mode represents the disabled axis i.e. if "z" then as if being viewed from above
      */
     public int[] convertCoordinates(Vector target, int yPixels, String mode) {
-        Vector screenVector = target.minus(this.position).mult(1 / this.zoom);
+        Vector screenVector = target.minus(this.position).mult(this.zoom);
         double[] screenPosDouble = screenVector.toArray();
 
         int[] screenPos = new int[2];
@@ -31,5 +31,10 @@ public class Camera {
 
     public void multZoom(double multiplier) {
         this.zoom *= multiplier;
+    }
+
+    public void move(int axis, double movementMultiplier) {
+        double distance = movementMultiplier / this.zoom;
+        this.position.set(axis, this.position.get(axis) + distance);
     }
 }

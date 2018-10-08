@@ -11,13 +11,14 @@ public class Viewer extends JPanel {
     private int ysize = 512;
 
     private int numberOfEntities = 0;
-    private Entity[] entities = new Entity[10];
+    private Entity[] entities;
 
     private Camera camera = new Camera();
 
     public Viewer(int xsize, int ysize) {
         this.xsize = xsize;
         this.ysize = ysize;
+        this.clearEntities();
         
         setBackground(Color.BLACK);
         setOpaque(true);
@@ -30,8 +31,13 @@ public class Viewer extends JPanel {
         return new Dimension(xsize,ysize);
     }
 
+    public Camera getCamera() {
+        return this.camera;
+    }
+
     public void clearEntities() {
         this.entities = new Entity[10];
+        this.numberOfEntities = 0;
     }
 
     public void addEntity(Entity entity) {
