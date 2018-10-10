@@ -15,6 +15,14 @@ public class Camera {
 
         int[] screenPos = new int[2];
         switch (mode) {
+            case "z":
+                screenPos[0] = (int) screenPosDouble[0];
+                screenPos[1] = (int) screenPosDouble[1];
+                break;
+            case "x":
+                screenPos[0] = (int) screenPosDouble[1];
+                screenPos[1] = (int) screenPosDouble[2];
+                break;
             default:
                 screenPos[0] = (int) screenPosDouble[0];
                 screenPos[1] = (int) screenPosDouble[2];

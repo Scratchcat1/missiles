@@ -43,7 +43,7 @@ public class Window extends JFrame implements MouseListener, KeyListener{
     public void updateViewers() {
         long startTime = System.nanoTime();
         this.worlds.get(this.currentWorld).step(0.5);
-        this.worlds.get(this.currentWorld).debugOutput(0);
+        // this.worlds.get(this.currentWorld).debugOutput(0);
         Entity[] entities = this.worlds.get(this.currentWorld).getState();
         for (Viewer viewer : this.viewers) {
             viewer.clearEntities();
@@ -63,16 +63,22 @@ public class Window extends JFrame implements MouseListener, KeyListener{
     public void mouseClicked(MouseEvent e) { repaint(); }
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
-            case KeyEvent.VK_LEFT:
-                this.viewers.get(this.currentViewer).getCamera().move(0, 10);       
+            case KeyEvent.VK_D:
+                this.viewers.get(this.currentViewer).getCamera().move(0, 10);
                 break;
-            case KeyEvent.VK_RIGHT:
-                this.viewers.get(this.currentViewer).getCamera().move(0, -10);       
+            case KeyEvent.VK_A:
+                this.viewers.get(this.currentViewer).getCamera().move(0, -10);
                 break;
-            case KeyEvent.VK_UP:
+            case KeyEvent.VK_W:
+                this.viewers.get(this.currentViewer).getCamera().move(1, 10);       
+                break;
+            case KeyEvent.VK_S:
+                this.viewers.get(this.currentViewer).getCamera().move(1, -10);       
+                break;
+            case KeyEvent.VK_E:
                 this.viewers.get(this.currentViewer).getCamera().move(2, 10);       
                 break;
-            case KeyEvent.VK_DOWN:
+            case KeyEvent.VK_Q:
                 this.viewers.get(this.currentViewer).getCamera().move(2, -10);       
                 break;
 

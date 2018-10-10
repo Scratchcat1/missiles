@@ -43,8 +43,8 @@ public class World {
             this.addCity(city);
         }
 
-        for (LaunchPlatform launchPlatform : Armory.createBasicLaunchPlatforms(10)) {
-            // launchPlatform.randomisePosition(minPosition, maxPosition);
+        for (LaunchPlatform launchPlatform : Armory.createBasicLaunchPlatforms(100)) {
+            launchPlatform.randomisePosition(minPosition, maxPosition);
             this.addLaunchPlatform(launchPlatform);
         }
     }
