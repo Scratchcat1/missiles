@@ -88,8 +88,8 @@ Viewer:
         take a world object and extract each object and render individually
         or
         convert all world objects into descriptive objects (i.e. type, location, children etc. ) in a tree
-
-    Convert coordinates into screen coordiantes.
+    -Camera:
+        Convert coordinates into screen coordiantes.
 
 
 
@@ -103,5 +103,6 @@ TASK LIST:
     - [X] @Override stuff    
     - [ ] update Targeting    
     - [ ] build renderer  
+        - [ ] Multiview  
     
 

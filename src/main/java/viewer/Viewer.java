@@ -4,21 +4,20 @@ import java.awt.*;
 
 import javax.swing.JPanel;
 
-import simulation.Entity;
+import simulation.*;
 
 public class Viewer extends JPanel {
     private int xsize = 512;
     private int ysize = 512;
 
-    private int numberOfEntities = 0;
-    private Entity[] entities;
+    private World world;
 
     private Camera camera = new Camera();
+    private String cameraMode = "y";
 
     public Viewer(int xsize, int ysize) {
         this.xsize = xsize;
         this.ysize = ysize;
-        this.clearEntities();
         
         setBackground(Color.BLACK);
         setOpaque(true);
@@ -35,32 +34,46 @@ public class Viewer extends JPanel {
         return this.camera;
     }
 
-    public void clearEntities() {
-        this.entities = new Entity[10];
-        this.numberOfEntities = 0;
+    public void setWorld(World world) {
+        this.world = world;
     }
 
-    public void addEntity(Entity entity) {
-        if (this.numberOfEntities == this.entities.length) {
-            Entity[] temp = new Entity[entities.length * 2];
-            for (int i = 0; i < this.entities.length; i++) {
-                temp[i] = this.entities[i];
-            }
-            this.entities = temp;
-        }
-        
-        this.entities[this.numberOfEntities] = entity;
-        this.numberOfEntities += 1;
+    public void setMode(String mode) {
+        this.cameraMode = mode;
     }
 
+    /** Draws all entities for the world the viewer currently is set to. */
+    @Override
     public void paint(Graphics g) {
         super.paintComponent(g);
         
-        for (int i = 0; i < this.numberOfEntities; i++) {
-            Entity entity = this.entities[i];
+        g.setColor(Color.WHITE);
+        for (City city : this.world.getCities()) {
+            int[] screenPos = this.camera.convertCoordinates(city.getPosition(), this.ysize, this.cameraMode);
+            g.drawRect(screenPos[0], screenPos[1], 1, 1);
+        }
+        
+        g.setColor(Color.GREEN);
+        for (LaunchPlatform launchPlatform : this.world.getLaunchPlatforms()) {
+            int[] screenPos = this.camera.convertCoordinates(launchPlatform.getPosition(), this.ysize, this.cameraMode);
+            g.drawRect(screenPos[0], screenPos[1], 1, 1);
+        }
 
-            g.setColor(Color.GREEN);
-            int[] screenPos = this.camera.convertCoordinates(entity.getPosition(), this.ysize, "y");
+        g.setColor(Color.BLUE);
+        for (Missile missile : this.world.getMissiles()) {
+            int[] screenPos = this.camera.convertCoordinates(missile.getPosition(), this.ysize, this.cameraMode);
+            g.drawRect(screenPos[0], screenPos[1], 1, 1);
+        }
+
+        g.setColor(Color.ORANGE);
+        for (Warhead warhead : this.world.getWarheads()) {
+            int[] screenPos = this.camera.convertCoordinates(warhead.getPosition(), this.ysize, this.cameraMode);
+            g.drawRect(screenPos[0], screenPos[1], 1, 1);
+        }
+
+        g.setColor(Color.RED);
+        for (Explosion explosion : this.world.getExplosions()) {
+            int[] screenPos = this.camera.convertCoordinates(explosion.getPosition(), this.ysize, this.cameraMode);
             g.drawRect(screenPos[0], screenPos[1], 1, 1);
         }
     }

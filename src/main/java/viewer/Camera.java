@@ -33,6 +33,11 @@ public class Camera {
         return screenPos;
     }
 
+    /** Converts distance into number of pixels at the current zoom level */
+    public int convertDistance(double distance) {
+        return (int) (distance * zoom);
+    }
+
     public void setZoom(double newZoom) {
         this.zoom = newZoom;
     }
