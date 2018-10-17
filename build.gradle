@@ -1,8 +1,30 @@
-apply plugin: 'java';
-apply plugin: 'application';
-mainClassName = 'viewer.Window';
+apply plugin: 'java'
+apply plugin: 'application'
+
+sourceSets {
+    main {
+        java {
+            srcDir 'src/main/java'
+        }
+    }
+    test {
+        java {
+            srcDir 'src/test'
+        }
+    }
+}
+
+mainClassName = 'viewer.Window'
+
+dependencies {
+    testImplementation 'junit:junit:4.12'
+}
 
 jar {
     baseName = 'missiles'
     version =  '0.1.0'
+}
+
+repositories {
+    jcenter()
 }

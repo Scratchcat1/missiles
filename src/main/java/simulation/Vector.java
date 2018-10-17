@@ -28,14 +28,7 @@ public class Vector{
     } 
     
     public boolean equals(Vector otherVector) {
-        boolean valid = true;
-        for (int i = 0; i < 3; i++) {
-            if (this.vector[i] != otherVector.get(i)) {
-                valid = false;
-                break;
-            }
-        }
-        return valid;
+        return Arrays.equals(this.vector, otherVector.toArray());
     }
 
     public Vector add(Vector otherVector) {
