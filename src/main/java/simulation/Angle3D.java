@@ -1,7 +1,7 @@
 package simulation;
 import java.util.Arrays;
 
-public class Angle3D{
+public class Angle3D {
     private double[] angle;
     // [Pitch, Yaw, Roll]
 
