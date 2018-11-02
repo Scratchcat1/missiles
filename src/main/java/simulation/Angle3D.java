@@ -24,6 +24,10 @@ public class Angle3D {
         this.angle[i] = value;
     }
 
+    public boolean equals(Angle3D otherAngle) {
+        return Arrays.equals(angle, otherAngle.toArray());
+    }
+
     public Vector toVector(double scalar) {
         Vector vector = new Vector();
         vector.set(2, scalar * Math.sin(this.angle[0]));
@@ -43,5 +47,9 @@ public class Angle3D {
 
     public String toString() {
         return "Angle3D:" + Arrays.toString(this.angle);
+    }
+
+    public double[] toArray() {
+        return this.angle;
     }
 }

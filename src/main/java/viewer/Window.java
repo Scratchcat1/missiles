@@ -2,6 +2,7 @@ package viewer;
 
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
 
@@ -15,28 +16,34 @@ public class Window extends JFrame implements MouseListener, KeyListener{
 
     public static void main(String[] args) {
         Window window = new Window();
+        window.run();
     }
 
     public Window() {
         this.viewers = new ArrayList<Viewer>();
-        this.worlds = new ArrayList<World>();
-
-        World world = new World();
-        world.setupBasic();
-        world.step(2);
-        world.debugOutput(1);
-        this.worlds.add(world);
+        this.worlds = Armory.createBasicWorlds(1);
 
         Viewer viewer = new Viewer(512, 512);
         this.viewers.add(viewer);
         this.changeWorld(0);
+
         add(viewer);
         pack();
         setVisible(true);
 
-
         addMouseListener(this);
         addKeyListener(this);
+    }
+
+    /** run the simulation continously */
+    public void run() {
+        while (true) {
+            this.stepWorld();
+            repaint();
+            try {
+                TimeUnit.MILLISECONDS.sleep(10);
+            } catch (Exception e) {}
+        }
     }
 
     public void changeWorld(int worldPosition) {
@@ -88,8 +95,6 @@ public class Window extends JFrame implements MouseListener, KeyListener{
             default:
                 break;
         }
-        this.stepWorld();
-        repaint();
     }
     public void keyReleased(KeyEvent e) {}
     public void keyTyped(KeyEvent e) {}

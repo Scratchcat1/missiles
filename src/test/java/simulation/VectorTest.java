@@ -22,6 +22,10 @@ public class VectorTest {
         negativeVector = new Vector(negativeArray);
     }
 
+    /** Ensures that the vectors have not been altered.
+     *  Call when using a function which should not alter 
+     *  the state of the Vector.
+     */
     protected void vectorsUnmodified() {
         assertEquals("Zero Vector should not have been modified by the operation",
             Arrays.equals(zeroVector.toArray(), new double[]{0, 0, 0}), true);
@@ -62,7 +66,6 @@ public class VectorTest {
     @Test
     public void set() {
         for (int i = 0; i < 3; i++) {
-            // Ensures that the value returned from the vector is the same in the initial array
             zeroVector.set(i, nonZeroArray[i]);
             assertEquals(zeroVector.get(i), nonZeroArray[i], 0);
         }

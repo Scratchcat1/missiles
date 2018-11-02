@@ -56,4 +56,28 @@ public class Armory{
         }
         return cities;
     }
+
+    public static ArrayList<World> createBasicWorlds(int count) {
+        ArrayList<World> worlds = new ArrayList<World>();
+
+        for (int i = 0; i < count; i++) {
+            World world = new World();
+
+            Vector minPosition = new Vector();
+            Vector maxPosition = new Vector(new double[]{10000, 10000, 10000});
+
+            for (City city : Armory.createBasicCities(10)) {
+                city.randomisePosition(minPosition, maxPosition);
+                world.addCity(city);
+            }
+
+            for (LaunchPlatform launchPlatform : Armory.createBasicLaunchPlatforms(100)) {
+                launchPlatform.randomisePosition(minPosition, maxPosition);
+                world.addLaunchPlatform(launchPlatform);
+            }
+            worlds.add(world);
+        }
+        
+        return worlds;
+    }
 }
