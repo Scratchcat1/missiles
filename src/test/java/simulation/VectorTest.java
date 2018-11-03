@@ -27,32 +27,32 @@ public class VectorTest {
      *  the state of the Vector.
      */
     protected void vectorsUnmodified() {
-        assertEquals("Zero Vector should not have been modified by the operation",
-            Arrays.equals(zeroVector.toArray(), new double[]{0, 0, 0}), true);
-        assertEquals("Non zero Vector should not have been modified by the operation",
-            Arrays.equals(nonZeroVector.toArray(), nonZeroArray), true);
-        assertEquals("Negative Vector should not have been modified by the operation",
-            Arrays.equals(negativeVector.toArray(), negativeArray), true);
+        assertEquals("Zero Vector should not have been modified by the operation", true,
+            Arrays.equals(zeroVector.toArray(), new double[]{0, 0, 0}));
+        assertEquals("Non zero Vector should not have been modified by the operation", true,
+            Arrays.equals(nonZeroVector.toArray(), nonZeroArray));
+        assertEquals("Negative Vector should not have been modified by the operation", true,
+            Arrays.equals(negativeVector.toArray(), negativeArray));
     }
 
     @Test
     public void instantiation() {
-        assertEquals("Vector created without arguments should be zeroed",
-            Arrays.equals(zeroVector.toArray(), new double[]{0, 0, 0}), true);
+        assertEquals("Vector created without arguments should be zeroed", true,
+            Arrays.equals(zeroVector.toArray(), new double[]{0, 0, 0}));
 
-        assertEquals("Vector should have same values as the array passed in",
-            Arrays.equals(nonZeroVector.toArray(), nonZeroArray), true);
+        assertEquals("Vector should have same values as the array passed in", true,
+            Arrays.equals(nonZeroVector.toArray(), nonZeroArray));
     }
 
     @Test
     public void testClone() {
         Vector clone = nonZeroVector.clone();
     
-        assertEquals("Cloned Vector should work on a different array to the original",
-            nonZeroVector.toArray() != clone.toArray(), true);
+        assertEquals("Cloned Vector should work on a different array to the original", true,
+            nonZeroVector.toArray() != clone.toArray());
 
-        assertEquals("Cloned Vector should be identical to the original",
-            nonZeroVector.equals(clone), true);
+        assertEquals("Cloned Vector should be identical to the original", true,
+            nonZeroVector.equals(clone));
     }
 
     @Test
@@ -73,32 +73,32 @@ public class VectorTest {
 
     @Test
     public void equals() {
-        assertEquals("A Vector is equal to an identical vector",
-            nonZeroVector.equals(nonZeroVector.clone()), true);
+        assertEquals("A Vector is equal to an identical vector", true,
+            nonZeroVector.equals(nonZeroVector.clone()));
 
-        assertEquals("A Vector is not equal to a non identical vector",
-            nonZeroVector.equals(zeroVector), false);
+        assertEquals("A Vector is not equal to a non identical vector", false,
+            nonZeroVector.equals(zeroVector));
     }
 
     @Test
     public void add() {
-        assertEquals("Vectors added should result in a correct third vector",
-            Arrays.equals(nonZeroVector.add(negativeVector).toArray(), new double[]{-1, 1, 1}), true);
+        assertEquals("Vectors added should result in a correct third vector", true,
+            Arrays.equals(nonZeroVector.add(negativeVector).toArray(), new double[]{-1, 1, 1}));
         
         vectorsUnmodified();
     }
 
     @Test
     public void minus() {
-        assertEquals("Vectors should subtract",
-            Arrays.equals(nonZeroVector.minus(negativeVector).toArray(), new double[]{3, 3, 9}), true);
+        assertEquals("Vectors should subtract", true,
+            Arrays.equals(nonZeroVector.minus(negativeVector).toArray(), new double[]{3, 3, 9}));
         vectorsUnmodified();
     }
 
     @Test
     public void mult() {
-        assertEquals("Vector multiplied by scalar",
-            Arrays.equals(nonZeroVector.mult(3).toArray(), new double[]{3, 6, 15}), true);
+        assertEquals("Vector multiplied by scalar", true,
+            Arrays.equals(nonZeroVector.mult(3).toArray(), new double[]{3, 6, 15}));
 
         assertEquals("Vector multiplied by Vector result in dot product",
             nonZeroVector.mult(negativeVector), -24);
@@ -111,8 +111,8 @@ public class VectorTest {
 
     @Test
     public void negative() {
-        assertEquals("Vector negative should be -1 * Vector",
-            Arrays.equals(nonZeroVector.negative().toArray(), new double[]{-1, -2, -5}), true);
+        assertEquals("Vector negative should be -1 * Vector", true,
+            Arrays.equals(nonZeroVector.negative().toArray(), new double[]{-1, -2, -5}));
             
         vectorsUnmodified();
     }

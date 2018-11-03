@@ -4,25 +4,25 @@ import java.util.ArrayList;
 public class Missile extends Entity{
     private ArrayList<Warhead> warheads;
     private ArrayList<Motor> motors;
-    private Targeting targeting;
+    private FlightController FlightController;
 
-    public Missile(double missileMass, int health, int maxHealth, Angle3D rotationRateLimit, ArrayList<Warhead> warheads, ArrayList<Motor> motors, Targeting targeting) {
+    public Missile(double missileMass, int health, int maxHealth, Angle3D rotationRateLimit, ArrayList<Warhead> warheads, ArrayList<Motor> motors, FlightController FlightController) {
         super(missileMass, health, maxHealth, rotationRateLimit);
         this.warheads = warheads;
         this.motors = motors;
-        this.targeting = targeting;
+        this.FlightController = FlightController;
     }
 
     public void update(double airResistance, double gravAccel, double timeStep) {
         Vector motorForce = new Vector();
         for (Motor motor : this.motors) {
-            motor.setDutyCycle(this.targeting.getDutyCycle(motor));
+            motor.setDutyCycle(this.FlightController.getDutyCycle(motor));
             motor.update(timeStep);
             motorForce = motorForce.add(motor.getForce());
         }
 
         this.updateKinetics(motorForce, airResistance, gravAccel, timeStep);
-        this.rotate(this.targeting.getRotationRate(this), timeStep);
+        this.rotate(this.FlightController.getRotationRate(this), timeStep);
 
         for (Motor motor : this.motors) {
             motor.setKinetics(this.getPosition(), this.getVelocity(), this.getAngle());
@@ -35,7 +35,7 @@ public class Missile extends Entity{
             Warhead warhead = this.warheads.get(i);
             warhead.setKinetics(this.getPosition(), this.getVelocity(), this.getAngle());
 
-            if (this.getRemainingWarheads() > 0 && this.targeting.shouldLaunch(warhead)) {
+            if (this.getRemainingWarheads() > 0 && this.FlightController.shouldLaunch(warhead)) {
                 launchingWarheadPositions.add(i);
             }
         }

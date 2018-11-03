@@ -5,7 +5,7 @@ public class Armory{
     public static ArrayList<Warhead> createBasicWarheads(int count) {
         ArrayList<Warhead> warheads = new ArrayList<Warhead>();
         for (int i = 0; i < count; i++) {
-            warheads.add(new Warhead(10, 30, 30, new Angle3D(new double[]{0.1, 0.1, 0.1}), 100, 1000, 200, new Targeting(new Vector())));
+            warheads.add(new Warhead(10, 30, 30, new Angle3D(new double[]{0.1, 0.1, 0.1}), 100, 1000, 200, new FlightController(new Vector())));
         }
         return warheads;
     }
@@ -21,7 +21,7 @@ public class Armory{
     public static ArrayList<Missile> createBasicMissiles(int count) {
         ArrayList<Missile> missiles = new ArrayList<Missile>();
         for (int i = 0; i < count; i++) {
-            missiles.add(new Missile(300, 100, 100, new Angle3D(new double[]{0.1, 0.1, 0.1}), Armory.createBasicWarheads(3), Armory.createBasicMotors(1), new Targeting(new Vector())));
+            missiles.add(new Missile(300, 100, 100, new Angle3D(new double[]{0.1, 0.1, 0.1}), Armory.createBasicWarheads(3), Armory.createBasicMotors(1), new FlightController(new Vector())));
         }
         return missiles;
     }
@@ -42,7 +42,7 @@ public class Armory{
     public static ArrayList<LaunchPlatform> createBasicLaunchPlatforms(int count) {
         ArrayList<LaunchPlatform> launchPlatforms = new ArrayList<LaunchPlatform>();
         for (int i = 0; i < count; i++) {
-            LaunchPlatform launchPlatform = new LaunchPlatform(10000, 1000, 1000, new Angle3D(new double[]{0.1, 0.1, 0.1}), Armory.createBasicLaunchers(2), Armory.createBasicMotors(30), new Targeting(new Vector()));
+            LaunchPlatform launchPlatform = new LaunchPlatform(10000, 1000, 1000, new Angle3D(new double[]{0.1, 0.1, 0.1}), Armory.createBasicLaunchers(2), Armory.createBasicMotors(30), new FlightController(new Vector()));
             //launchPlatform.setAngle(new Angle3D(new double[]{0, 0, 0}));
             launchPlatforms.add(launchPlatform);
         }
@@ -77,7 +77,7 @@ public class Armory{
             }
             worlds.add(world);
         }
-        
+
         return worlds;
     }
 }

@@ -1,9 +1,11 @@
 package simulation;
-public class Targeting{
-    private Vector targetPosition;
 
-    public Targeting(Vector targetPosition) {
-        this.targetPosition = targetPosition;
+/** Control movement of entities to approach a target object or point */
+public class FlightController{
+    private Vector target;
+
+    public FlightController(Vector target) {
+        this.target = target;
     }
 
     public boolean shouldDetonate(Warhead warhead) {
@@ -28,6 +30,7 @@ public class Targeting{
     }
 
     public Angle3D getRotationRate(Entity entity) {
+        
         return new Angle3D(new double[]{0.0, 0.0, 0.0});
     }
 

@@ -73,10 +73,10 @@ public class World {
         }
 
         for (LaunchPlatform launchPlatform : this.launchPlatforms) {
-            //update targeting
+            //update FlightController
         }
         for (Missile missile : this.missiles) {
-            //update targeting
+            //update FlightController
         }
 
         this.updateAll(timeStep);

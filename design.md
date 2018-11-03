@@ -95,14 +95,20 @@ Viewer:
 
 TASK LIST:  
     - [x] Get warheads to detonate on command:  
-        Warheads now use targeting to detonate  
+        Warheads now use flight controller to detonate  
     - [x] Allow rotation of Entities:  
         - [x] Add rotationRateLimit  
         - [ ] ???  
-        - [x] Add targeting control of rotation  
+        - [x] Add flight controller control of rotation  
     - [X] @Override stuff    
-    - [ ] update Targeting    
+    - [ ] update flight controller
+        - [ ] Control rotation
+        - [ ] Control thrust
+    - [ ] add targeting
+        - [ ] rotate launchers
+        - [ ] incorporate launch systems
     - [ ] build renderer  
         - [ ] Multiview  
+    - [ ] remove unneeded "this."
     
 
