@@ -111,6 +111,36 @@ public class Angle3DTest {
     }
 
     @Test
+    public void fromVector() {
+        Vector testVector;
+
+        testVector = new Vector(new double[]{0, 0, 0});
+        assertEquals("All zero vector should return all zero angle", true,
+            Arrays.equals(new Angle3D(testVector).toArray(), new double[]{0, 0, 0}));
+        
+        testVector = new Vector(new double[]{0, 0, 123});
+        assertEquals("Zero x, y with positive z should return correct array", true,
+            Arrays.equals(new Angle3D(testVector).toArray(), new double[]{Math.PI / 2, 0, 0}));
+
+        testVector = new Vector(new double[]{0, 0, -123});
+        assertEquals("Zero x, y with negative z should return correct array", true,
+            Arrays.equals(new Angle3D(testVector).toArray(), new double[]{-Math.PI / 2, 0, 0}));
+
+        testVector = new Vector(new double[]{0, 111, 0});
+        assertEquals("Zero x, z with positive y should return correct array", true,
+            Arrays.equals(new Angle3D(testVector).toArray(), new double[]{0, Math.PI / 2, 0}));
+            
+        testVector = new Vector(new double[]{0, -111, 0});
+        assertEquals("Zero x, z with negative y should return correct array", true,
+            Arrays.equals(new Angle3D(testVector).toArray(), new double[]{0, -Math.PI / 2, 0}));
+
+        System.out.println(new Angle3D(new Vector(new double[]{1,1,1})).toString());
+        testVector = new Vector(new double[]{1, 1, 1});
+        assertEquals("Vector should be correctly converted", true,
+            Arrays.equals(new Angle3D(testVector).toArray(), new double[]{0.6154797086703873, Math.PI/4, 0}));
+    }
+
+    @Test
     public void toVector() {
         // Each axis should be approximately what is expected
         // the test loops through each an verifies they are approximately correct

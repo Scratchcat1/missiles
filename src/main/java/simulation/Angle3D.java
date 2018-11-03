@@ -60,12 +60,21 @@ public class Angle3D {
     /** Import angle sizes using a vector. */
     public void fromVector(Vector vector) {
         angle[2] = 0;   // we can't determine roll
-        angle[1] = Math.atan(vector.get(1) / vector.get(0));    // get yaw
+
+        if (vector.get(0) == 0){
+            angle[1] = Math.signum(vector.get(1)) * Math.PI / 2;     // Handle case where 1/0 -> NaN including sign
+        } else {
+            angle[1] = Math.atan(vector.get(1) / vector.get(0));    // get yaw - tan-1(o/a)
+        }
 
         double squaredXYScalar = Math.pow(vector.get(0), 2) + Math.pow(vector.get(1), 2);
         double xyScalar = Math.sqrt(squaredXYScalar);
 
-        angle[0] = Math.atan(vector.get(2) / xyScalar);
+        if (xyScalar == 0) {
+            angle[0] = Math.signum(vector.get(2)) * Math.PI / 2;     // Handle case where 1/0 -> NaN including sign
+        } else {
+            angle[0] = Math.atan(vector.get(2) / xyScalar);
+        }
     }
 
     /** Returns vector representation of the angle, multiplied by the scalar. */
